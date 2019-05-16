@@ -1,0 +1,149 @@
+﻿
+@model GRM.Models.tbl_Products
+@{
+    ViewBag.Title = "ProductEdit";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+
+<style>
+    .validator {
+        color: #EF4836;
+    }
+</style>
+
+<div style="margin-left:18%; margin-top:2%">
+    <!-- Nav pills -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="prodLink nav-link active" data-toggle="pill" href="#home">Edit Package</a>
+        </li>
+
+
+    </ul>
+
+    <!-- Tab panes -->
+    <div style="margin-top:4%; margin-right:3%" class="tab-content">
+
+
+        <div class="tab-pane container active" id="home">
+
+
+            @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post, new { @class = "registrationForm", enctype = "multipart/form-data" }))
+            {
+
+
+                <div class="errorProduct alert alert-danger">@Html.DisplayFor(model => model.errorMessage, new { @class = "outputMessage" })</div>
+                <div class="successProduct alert alert-success">@Html.DisplayFor(model => model.successMessage, new { @class = "outputMessage" })</div>
+
+
+                <div style=" width:50%; margin-top:3%">
+
+
+
+                    <h5>Package Name</h5>
+                    <p class="validator">@Html.ValidationMessageFor(model => model.productName)</p>
+                    @Html.TextBoxFor(model => model.productName, new { Value = ViewBag.package.productName, @class = "form-control", style = "margin-bottom:2%;" })
+
+                    <h5>Package Description</h5>
+
+
+                    <center>
+                        @Html.TextAreaFor(model => model.productDescription, new { Value = ViewBag.package.productDescription, @id = "text2", @class = "texta", @rows = "20", @style = "width:1600px!important" });
+
+                    </center>
+
+                    <p class="validator">@Html.ValidationMessageFor(model => model.productPrice)</p>
+                 <h5>Price</h5>
+                       @Html.TextBoxFor(model => model.productPrice, new { Value = ViewBag.package.productPrice, @class = "form-control", style = "margin-bottom:2%;", maxlength = "4" })
+
+                    @Html.TextBoxFor(model => model.productId, new { Value = ViewBag.package.productId, style = "display:none" })
+
+                    <h5>Category</h5>
+
+                    <!-- We will output GetDropDown() here. We are pointing the path of GetDropDown from the controller on the second arguments. which is GRM.Controllers.Admincontroler.GetDropDown() -->
+                    @Html.DropDownListFor(model => model.categoryId, GRM.Controllers.AdminController.GetDropDown(), new {Value = "Main Dish",    @class = "form-control" })
+
+
+
+
+                    <br /><br />
+                    <h5>Image</h5>
+                    <input type="file" name="productImage" class="form-control" />
+
+
+
+
+                    <br />
+
+                    <input type="submit" class="btn btn-primary" />
+
+                </div>
+                <br /><br /><br /><br /><br />
+            }
+
+
+        </div>
+
+
+
+        <script src="~/Scripts/jquery223.js"></script>
+
+        <script>
+         
+    $(document).ready(function () {
+
+
+
+        if ($('.successCategory').text() == "Category Added") {
+            $('.successCategory').css("cssText", "display:block !important");
+            $('.catLink').addClass("active show");
+            $('.prodLink').removeClass("active show");
+            $('#home').removeClass("active");
+            $('#home').removeClass("show");
+            $('#menu1').addClass("active show");
+        } else {
+            $('.successCategory').css("cssText", "display:none !important");
+        }
+
+        if ($('.errorCategory').text() == "The category name is already taken") {
+            $('.errorCategory').css("cssText", "display:block !important");
+            $('.catLink').addClass("active show");
+            $('.prodLink').removeClass("active show");
+            $('#home').removeClass("active");
+            $('#home').removeClass("show");
+            $('#menu1').addClass("active show");
+        } else {
+            $('.errorCategory').css("cssText", "display:none !important");
+
+        }
+
+
+    if ($('.successProduct').text() == "Product Added") {
+        $('.successProduct').css("cssText", "display:block !important");
+
+    } else {
+        $('.successProduct').css("cssText", "display:none !important");
+    }
+
+    if ($('.errorProduct').text() == "The name is already taken") {
+        $('.errorProduct').css("cssText", "display:block !important");
+
+    } else {
+        $('.errorProduct').css("cssText", "display:none !important");
+    }
+    });
+
+
+
+
+
+        </script>
+
+
+        <script>
+
+    tinymce.init({
+        selector: 'textarea'
+
+    });
+        </script>

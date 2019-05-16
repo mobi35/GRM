@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "ShowNews";
+
+}
+
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>GRM</title>
+    <!--meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hotel zone Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script>
+         addEventListener("load", function () {
+         	setTimeout(hideURLbar, 0);
+         }, false);
+
+         function hideURLbar() {
+         	window.scrollTo(0, 1);
+         }
+    </script>
+    <!--//meta tags ends here-->
+    <!--booststrap-->
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+    <!--//booststrap end-->
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="../css/fontawesome-all.css"> <!-- Font-Awesome-Icons-CSS -->
+    <!-- //font-awesome icons -->
+    <link href="../css/simpleLightbox.css" rel='stylesheet' type='text/css' />
+    <!--stylesheets-->
+    <link rel="stylesheet" href="../css/flexslider.css" type="text/css" media="screen" property="" />
+    <link href="../css/style.css" rel='stylesheet' type='text/css' media="all">
+    <!--//stylesheets-->
+    <link href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+</head>
+<body>
+    <style>
+        .active {
+            color: gold !important;
+        }
+    </style>
+    <!-- Navigation -->
+    <header>
+        <div style="background-color: gray;" class="top-nav">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a style="background-color: gold;" class="navbar-brand text-uppercase" href="index.html">G R M</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center pr-md-4" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item ">
+                                <a style="color: gold;" class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Login", "Home")">Login</a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <br /><br /><br /><br />
+    <div style="margin-left:20%; width:50%; margin-top:3%">
+        <img src="~/Content/@ViewBag.specNews.featureImage" width="800" height="400" /><br /><br />
+        <hr />
+       <h1 >@Html.Raw(ViewBag.specNews.title)</h1>
+        <hr />
+        @Html.Raw(ViewBag.specNews.content)
+        <br /><br />
+        <hr />
+        <i> @ViewBag.specNews.datapublish</i>
+    </div>
+    
+
+
+<hr />
+<br /><br /><br />
+<h1 style="background-color: gold; text-align: center; width: 100%;">Other news</h1>
+<br />
+<div style="text-align: center;" class="row">
+    
+    @{ 
+    foreach (var news in ViewBag.news)
+    {
+    
+        <div class="col-md-3">
+            <img src ="../Content/@news.featureImage" width="30%" />
+
+        </div>
+
+    }
+    
+    }
+
+  
+
+
+
+</div>
+
+
+
+
+
+
+
+    <section class="newsletter text-center py-5">
+        <div class="container py-lg-3">
+
+            <div class="copyright mt-5">
+                <p>© 2018 GRM  </p>
+            </div>
+        </div>
+    </section>

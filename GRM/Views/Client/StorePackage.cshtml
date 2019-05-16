@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "StorePackage";
+    Layout = "~/Views/Shared/clientMaster.cshtml";
+}
+
+<div style="margin-left:18%; margin-top:2%">
+    <!-- Nav pills -->
+
+   
+
+        @{
+        <!--(List<GRM.Models.tbl_ProductCategories>)-->
+
+          
+            <h3 style =" width: 100%; "><span  style ="color: white;background-color: gold; padding: 10px;"> Packages</span></h3>
+            <br/>
+
+
+        }
+
+
+
+
+
+    <!-- Tab panes -->
+    <div style="margin-top:4%; margin-right:3%" class="tab-content">
+
+        @{
+        <!--(List<GRM.Models.tbl_ProductCategories>)-->
+
+          
+
+                <div class="tab-pane container active show  " id="Package">
+                    <div class="container">
+                        <div class="row">
+                            @{
+                                 
+
+                                foreach (var seleach in ViewBag.AllProducts)
+                                    {
+
+                                    <div class="col-xs-4 col-sm-3 col-md-2">
+                                        <div class="thumbnail">
+                                            <a href="~/Client/Product/@seleach.productId">
+                                            
+                                                @{
+
+                                                    if(ViewBag.besters != null) { 
+                                                    if (ViewBag.besters.productName == seleach.productName)
+                                                    {
+                                                        <img src="~/Content/bs.png" width="60" style="position:absolute" height="60" class="img-responsive">
+                                                        }
+                                                    }
+                                                }
+                                            
+                                            <img src="~/Content/@seleach.productImage" width="150px" height="150px" class="img-responsive">
+                                            
+                                            
+                                            </a>
+                                            <div class="caption">
+                                                <p style="color:black">@seleach.productName</p>
+                                                <div class="row">
+                                                    <div class="col-md-3 col-sm-3 col-xs-3 price">
+                                                        <h4 style="color:black;margin:5% auto;"><label style="font-size:14px">₱@seleach.productPrice</label></h4>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                                        <a href="#" onclick="return AddToCart('@seleach.productId')" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</a>
+                                                    </div>
+                                                </div>
+                                                <p> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+                                }
+
+     
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+

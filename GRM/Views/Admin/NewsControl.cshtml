@@ -1,0 +1,67 @@
+﻿
+@model GRM.Models.tbl_News
+@{
+    ViewBag.Title = "NewsControl";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+
+
+
+<div style="margin-left:18%; margin-top:2%">
+    <!-- Nav pills -->
+    <h3 style =" width: 100%; "><span  style ="color: white;background-color: gold; padding: 10px;">Add News</span></h3>
+
+</div>
+
+<div style="margin-left:20%; width:77%; margin-top:3%">
+    <div class="table-responsive">
+        <form method="post" action="../../Admin/DeleteNews">
+            <table id="news" class="table table-striped table-bordered nowrap">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+
+                        <th>Date</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+
+                        foreach (var news in ViewBag.newsList)
+                        {
+
+                            <tr>
+                                <td>@news.title</td>
+
+                                <td>@news.datapublish</td>
+                                <td>
+                                    <input type="hidden" name="id" value="@news.Id" />
+                                    <input  class="btn btn-danger" value="Delete" type="submit" />
+
+                                </td>
+
+                            </tr>
+
+                        }
+                    }
+
+
+
+                </tbody>
+            </table>
+        </form>
+    </div>
+   
+</div>
+
+
+    <script>
+
+    tinymce.init({
+        selector: 'textarea'
+
+    });
+    </script>

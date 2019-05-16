@@ -1,0 +1,463 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>GRM</title>
+    <!--meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hotel zone Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!--//meta tags ends here-->
+    <!--booststrap-->
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+    <!--//booststrap end-->
+    <link href="~/Content/fontawesome-stars.css" rel="stylesheet" />
+
+    <link href="~/Content/bars-1to10.css" rel="stylesheet" />
+
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="../css/fontawesome-all.css"> <!-- Font-Awesome-Icons-CSS -->
+    <!-- //font-awesome icons -->
+    <link href="../css/simpleLightbox.css" rel='stylesheet' type='text/css' />
+    <!--stylesheets-->
+    <link rel="stylesheet" href="../css/flexslider.css" type="text/css" media="screen" property="" />
+    <link href="../css/style.css" rel='stylesheet' type='text/css' media="all">
+    <!--//stylesheets-->
+    <link href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="top-nav">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a style="background-color: gold;" class="navbar-brand text-uppercase" href="index">G R M</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center pr-md-4" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item ">
+                                <a style="color: gold;" class="nav-link" href="@Url.Action("Index", "Home")">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Login", "Home")">Login</a>
+                            </li>
+                        
+                         
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- //Navigation -->
+    <!--Slider-->
+    <div class="slider">
+        <div class="callbacks_container">
+
+            <ul class="rslides callbacks callbacks1" id="slider4">
+                
+            @{
+
+                int num = 1;
+                foreach (var news in ViewBag.news)
+                {
+
+                    var a = "";
+                        
+
+                <li>
+                    <div >
+                        <img style="z-index: -200; width: 100%; height: 650px; max-height: 650px;"  src="~/Content/@news.featureImage" /> 
+                        <div class="dot">
+                            <div class="container">
+                                <div class="slider_banner_info_w3ls">
+                                    <h1 class="text-uppercase mb-3">@news.title</h1>
+
+                                    @Html.Raw(@news.content)
+
+                                    @using (Html.BeginForm("ShowNews", "Home", FormMethod.Post, new {@class = "registrationForm", enctype = "multipart/form-data"}))
+                                    {
+                                        <input type="hidden" value="@news.Id" name="urls"/>
+
+                                        <input style="background-color: gold; color: white;" class="btn btn-submit" type="submit" value="Learn More" role="button"/>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                }
+            }
+
+       
+        </div>
+      
+        <div class="clearfix"></div>
+        </ul>
+    </div>
+
+    <!--//Slider-->
+    <!-- //banner -->
+    <!-- welcome -->
+<div  class="welcome py-5" id="about">
+    <div class="container py-md-3">
+        <div class="row">
+            <div class="col-lg-6 welcome-w3lright">
+                <div class="video-grid-single-page-agileits">
+                    @Html.Raw(TempData["s1"])
+                </div>
+            </div>
+            <div class="col-lg-6 welcome_left">
+                @Html.Raw(TempData["s2"])
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<hr />
+
+<div style="background-color: gold;"style="background-color: gold;" class="welcome py-5" id="about">
+    <div class="container py-md-3">
+        <div class="row">
+            <div class="col-lg-6 welcome-w3lright">
+                <div class="video-grid-single-page-agileits">
+                    @Html.Raw(TempData["s3"])
+                </div>
+            </div>
+            <div class="col-lg-6 welcome_left">
+                @Html.Raw(TempData["s4"])
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<hr />
+<div class="welcome py-5" id="about">
+    <div class="container py-md-3">
+        <div class="row">
+            <div class="col-lg-6 welcome-w3lright">
+                <div class="video-grid-single-page-agileits">
+                    @Html.Raw(TempData["s5"])
+                </div>
+            </div>
+            <div class="col-lg-6 welcome_left">
+                @Html.Raw(TempData["s6"])
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!-- //welcome -->
+    <!-- services -->
+
+    <!-- //services -->
+
+    <!--//team -->
+    <!--/Gallry-->
+    <div class="banner-bottom py-5" id="gallery">
+        <div class="container py-md-3">
+            <div class="w3-head-all mb-3">
+                <h3>Our Gallery</h3>
+            </div>
+            <div class="row inner-sec">
+
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 proj_gallery_grid" data-aos="zoom-in">
+                    <div  class="section_1_gallery_grid">
+                        @Html.Raw(TempData["s7"])
+                    </div>
+                    <div class="section_1_gallery_grid" data-aos="zoom-in">
+                        @Html.Raw(TempData["s8"])
+                    </div>
+
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 proj_gallery_grid" data-aos="zoom-in">
+                    <div class="section_1_gallery_grid">
+                        @Html.Raw(TempData["s9"])
+
+                    </div>
+                    <div class="section_1_gallery_grid" data-aos="zoom-in">
+                    
+                        @Html.Raw(TempData["s10"])
+                    </div>
+
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 proj_gallery_grid" data-aos="zoom-in">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-6 col-sm-6 pr-lg-3 pr-2 section_1_gallery_grid">
+                            @Html.Raw(TempData["s11"])
+
+                        </div>
+                        <div class="col-lg-12 col-md-6 col-sm-6 pl-lg-3 pl-2 section_1_gallery_grid" data-aos="zoom-in">
+                         
+                            @Html.Raw(TempData["s12"])
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="overlay"></div>
+ 
+    <!--//gallery-->
+    <!-- odometer stats-->
+
+
+    <!-- //odometer stats -->
+
+    <!--// rooms & rates -->
+    <!-- Appointment -->
+    <section class="appointment py-5" id="appointment">
+        <div class="test_agile_info">
+            <div class="container py-md-3">
+                <div class="w3-head-all mb-3 w3-head-col">
+                    <h3>Contact Us</h3>
+                </div>
+                <div class="contact_grid_right">
+                @using (Html.BeginForm("InsertInquiry", "Home", FormMethod.Post, new {@class = "form-signin"}))
+                {
+                    <form action="#" method="post">
+                        <div class="contact_left_grid">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="name" placeholder="Your Name" required="">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="email" name="email" placeholder="Your Email" required="">
+                            </div>
+                       
+      
+                            <div class="form-group">
+                                <textarea id="textarea" name ="message" placeholder="Your Message Here"></textarea>
+                            </div>
+                            <input style="background-color: gold;" class="form-control" type="submit" value="Send Message">
+                        </div>
+                    </form>
+                }
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //Appointment -->
+
+    <!---->
+    <!--//main-->
+
+    <!--map-->
+   
+    <!-- //map-->
+    <!-- //Contact-form -->
+    <!-- footer section -->
+    <section class="newsletter text-center py-5">
+        <div class="container py-lg-3">
+   
+            <div class="copyright mt-5">
+                <p>© 2018 GRM  </p>
+            </div>
+        </div>
+    </section>
+    <!-- //footer section -->
+    <!-- Vertically centered Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-uppercase text-center" id="exampleModalLongTitle"> Hotel zone</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/ban5.jpg" class="img-fluid mb-3" alt="Modal Image" />
+                    Vivamus eget est in odio tempor interdum. Mauris maximus fermentum arcu, ac finibus ante. Sed mattis risus at ipsum elementum, ut auctor turpis cursus. Sed sed odio pharetra, aliquet velit cursus, vehicula enim. Mauris porta aliquet magna, eget laoreet ligula.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //Vertically centered Modal -->
+<script src='../js/jquery-2.2.3.min.js'></script>
+
+    <!-- //js  working-->
+    <!-- Banner Responsive slider -->
+<script src="../js/responsiveslides.min.js"></script>
+    <style>
+      
+
+#overlay{
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.8) none 50% / contain no-repeat;
+  cursor: pointer;
+  transition: 0.3s;
+  
+  visibility: hidden;
+  opacity: 0;
+}
+#overlay.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+#overlay:after { /* X button icon */
+  content: "\2715";
+  position: absolute;
+  color:#fff;
+  top: 10px;
+  right:20px;
+  font-size: 2em;
+}
+    </style>
+
+<script>
+
+    $('img').on('click', function () {
+     
+        $('#overlay')
+          .css({ backgroundImage: `url(${this.src})` })
+          .addClass('open')
+          .one('click', function () { $(this).removeClass('open'); });
+    });
+    // You can also use "$(window).load(function() {"
+    $(function () {
+        // Slideshow 4
+        $("#slider4").responsiveSlides({
+            auto: true,
+            pager: false,
+            nav: true,
+            speed: 500,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+
+    });
+</script>
+    <!-- // Banner Responsive slider -->
+    <!--// banner-->
+    <!-- simpleLightbox -->
+    <script src="../js/simpleLightbox.js"></script>
+    <script>
+        // Image to Lightbox Overlay 
+    
+
+
+        $('.proj_gallery_grid a').simpleLightbox();
+    </script>
+    <!-- //simpleLightbox -->
+    <!-- flexSlider -->
+    <script defer src="../js/jquery.flexslider.js"></script>
+    <script>
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                start: function (slider) {
+                    $('body').removeClass('loading');
+                }
+            });
+        });
+    </script>
+
+    <!-- //flexSlider -->
+    <!-- Calendar -->
+    <link rel="stylesheet" href="../css/jquery-ui.css" />
+    <script src="../js/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+        });
+    </script>
+    <!-- //Calendar -->
+    <!-- odometer-script -->
+    <script src="../js/odometer.js"></script>
+    <script>
+        window.odometerOptions = {
+            format: '(ddd).dd'
+        };
+    </script>
+    <script>
+        setTimeout(function () {
+            jQuery('#w3l_stats1').html(25);
+        }, 1500);
+    </script>
+    <script>
+        setTimeout(function () {
+            jQuery('#w3l_stats2').html(330);
+        }, 1500);
+    </script>
+    <script>
+        setTimeout(function () {
+            jQuery('#w3l_stats3').html(542);
+        }, 1500);
+    </script>
+    <script>
+        setTimeout(function () {
+            jQuery('#w3l_stats4').html(222);
+        }, 1500);
+    </script>
+    <!-- //odometer-script -->
+    <!-- start-smoth-scrolling -->
+    <script src="../js/move-top.js"></script>
+    <script src="../js/easing.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+    <!-- start-smoth-scrolling -->
+    <!-- here stars scrolling icon -->
+    <script>
+        $(document).ready(function () {
+            /*
+                var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+                };
+            */
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <!-- //here ends scrolling icon -->
+    <!--bootstrap working-->
+    <script src="../js/bootstrap.js"></script>
+    <!-- //bootstrap working-->
+</body>
+</html>

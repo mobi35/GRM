@@ -1,0 +1,37 @@
+﻿@model GRM.Models.tbl_Users
+@{
+    Layout = null;
+}
+<link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RawData</title>
+</head>
+<body>
+    <div> 
+        <h1>Total Sales of Every Branch</h1>
+        <table class="table">
+            <tr>
+            <th>Branch</th>
+             <th>Total Sales</th>
+            </tr>
+            @{
+                foreach (var c in ViewBag.modelFinal)
+                {
+                    <tr>
+                        <td>@c.user</td>
+                        <td>@c.totalSale</td>
+                    </tr>
+                }
+
+            }
+        </table>
+    </div>
+</body>
+</html>
+<script>
+
+    window.print();
+</script>

@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Sales</title>
+</head>
+<body>
+    <div>
+        <h1>Sales</h1>
+        <h1>@ViewBag.type </h1>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Message</th>
+                <th>Date</th>
+            </tr>
+            @{
+                foreach (var c in ViewBag.Salez)
+                {
+                    <tr>
+                        <td>@c.orderId</td>
+                        <td>@c.client</td>
+                        <td>@c.totalSales</td>
+                        <td>@c.orderDate.ToLongDateString()</td>
+                    </tr>
+                }
+
+            }
+        </table>
+    </div>
+</body>
+</html>
+<script>
+
+    window.print();
+</script>

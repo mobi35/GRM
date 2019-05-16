@@ -1,0 +1,40 @@
+﻿@model GRM.Models.tbl_Users
+@{
+    Layout = null;
+}
+<link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RawData</title>
+</head>
+<body>
+    <div>
+        <h1>Best Selling Products</h1>
+        <table class="table">
+            <tr>
+                <th>Product</th>
+                <th>Sale</th>
+                <th>Branch</th>
+            </tr>
+            @{
+                foreach (var c in ViewBag.bestList)
+                {
+                    <tr>
+                        <td>@c.product</td>
+                        <td>@c.numberOfSales</td>
+                        <td>@c.branch</td>
+                    </tr>
+                }
+
+            }
+        </table>
+    </div>
+</body>
+</html>
+
+<script>
+
+    window.print();
+</script>

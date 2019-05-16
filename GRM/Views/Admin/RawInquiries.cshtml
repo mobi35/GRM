@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>RawData</title>
+</head>
+<body>
+    <div>
+        <h1>Inquiries</h1>
+        <h1>@ViewBag.type </h1>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Message</th>
+                <th>Date</th>
+            </tr>
+            @{
+                foreach (var c in ViewBag.InquiryData)
+                {
+                    <tr>
+                        <td>@c.name</td>
+                        <td>@c.inquiries</td>
+                        <td>@c.date_inq.ToLongDateString()</td>
+                    </tr>
+                }
+
+            }
+        </table>
+    </div>
+</body>
+</html>
+<script>
+
+    window.print();
+</script>

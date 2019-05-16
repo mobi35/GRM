@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "ReplyFeed";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+<br />
+<h2>ReplyFeed</h2>
+<form method="post" action="~/Admin/ReplyFeed">
+    <input type="text" value="@Request["email"].ToString()" name="emailmsg" class="form-control user" />
+    <textarea class="form-control" name="feedmsg"></textarea>
+    <input type="submit" />
+</form>

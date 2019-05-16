@@ -1,0 +1,113 @@
+﻿@model GRM.Models.tbl_Users
+
+@{
+    ViewBag.Title = "EditUser";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+
+<style>
+    .validator {
+        color: #EF4836;
+    }
+
+    .bg-danger {
+        padding: 10px 10px 10px 10px !important;
+        opacity: 0.9 !important;
+    }
+</style>
+
+
+@using (Html.BeginForm("EditNow", "Admin", FormMethod.Post, new { @class = "registrationForm", enctype = "multipart/form-data" }))
+{
+
+    <div class="outputHolder" style="margin-top:3%; ">
+       
+    </div>
+
+    <div style="margin-left:20%; width:50%; margin-top:3%">
+
+
+
+        <input type="hidden" name="myId" value="@ViewBag.userModel.userId" />
+
+
+        <h5> @Html.LabelFor(model => model.firstName)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.firstName)</p>
+        @Html.TextBoxFor(model => model.firstName, new { Value = ViewBag.userModel.firstName, @class = "form-control", style = "margin-bottom:2%;" })
+
+        <h5> @Html.LabelFor(model => model.lastName)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.lastName)</p>
+        @Html.TextBoxFor(model => model.lastName, new { Value = ViewBag.userModel.lastName, @class = "form-control", style = "margin-bottom:2%;" })
+
+
+
+        <h5>   @Html.LabelFor(model => model.PassWord)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.PassWord)</p>
+
+        @Html.TextBoxFor(model => model.PassWord, new { Value = ViewBag.userModel.PassWord, @class = "form-control", type = "password", style = "margin-bottom:2%;" })
+
+    
+        <h5>  @Html.LabelFor(model => model.emailAddress)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.emailAddress)</p>
+        @Html.TextBoxFor(model => model.emailAddress, new { Value = ViewBag.userModel.emailAddress, @class = "form-control", style = "margin-bottom:2%;" })
+
+        <h5>  @Html.LabelFor(model => model.homeAddress)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.homeAddress)</p>
+        @Html.TextBoxFor(model => model.homeAddress, new { Value = ViewBag.userModel.homeAddress, @class = "form-control", style = "margin-bottom:2%;" })
+        
+        <h5>  @Html.LabelFor(model => model.contactnumber)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.contactnumber)</p>
+        @Html.TextBoxFor(model => model.contactnumber, new { Value = ViewBag.userModel.contactnumber, @class = "form-control", style = "margin-bottom:2%;" })
+
+
+        <h5>  @Html.LabelFor(model => model.gender)</h5>
+
+        @Html.DropDownListFor(model => model.gender, new List<SelectListItem> {
+       new SelectListItem { Text = "Male", Value = "Male" },
+       new SelectListItem { Text = "Female", Value = "Female" }
+   }, new { @class = "form-control", style = "margin-bottom:2%;" })
+
+
+  
+
+      
+
+        
+
+
+
+
+
+        <input type="submit" class="btn btn-primary registerButton" />
+
+    </div>
+    <br /><br /><br /><br /><br />
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        if ($('.outs').text() == "") {
+            $('.outputHolder').css("display", "none");
+        }
+
+        if ($('.outs').text() == "Registered") {
+
+            $('.dangerz').css("cssText", "background-color :green !important;");
+            $('input[type="text"],input[type="password"]').val('');
+        }
+    });
+
+
+
+    $('.registerButton').click(function () {
+
+
+        if ($('.outs').text() != null) {
+            $('.outputHolder').css("display", "inline");
+        } else {
+            $('.outputHolder').css("display", "none");
+        }
+    });
+
+
+</script>

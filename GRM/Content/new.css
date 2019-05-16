@@ -1,0 +1,60 @@
+﻿ @media print {
+      .print-feedback{
+          display:none;
+      }
+
+      .datings{
+          display:none;
+      }
+
+
+       #dailyButton{
+          display:none;
+      }
+         #monthlyButton{
+          display:none;
+      }
+           #quarterlyButton{
+          display:none;
+      }
+  #yearButton{
+          display:none;
+      }
+   #yearButtonLines{
+          display:none;
+      } #quarterlyButtonLines{
+          display:none;
+      } #monthlyButtonLines{
+          display:none;
+      } #dailyButtonLines{
+          display:none;
+      }
+
+        .container-fluid{
+            display:none;
+        }
+
+        .col-md-9{
+            
+        width:99%!important;
+        }
+
+        .col-lg-10 {
+            width:99%!important;
+        }
+
+        #printChart{
+        display:none;
+        }
+        #chartLabel{
+            display:block!important;
+        }  #feedbackLabel{
+            display:block!important;
+        }
+        
+        main{
+            margin-top:100px;
+        }
+      }
+   
+   

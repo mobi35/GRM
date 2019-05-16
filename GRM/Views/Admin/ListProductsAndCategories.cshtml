@@ -1,0 +1,291 @@
+﻿
+
+@model GRM.Models.tbl_Products
+
+@{
+    ViewBag.Title = "ListProductsAndCategories";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+
+
+<style>
+    .flex-column {
+        margin-top: 8%;
+    }
+</style>
+
+<div style="margin-left:18%; margin-top:2%">
+    <!-- Nav pills -->
+    <h3 style =" width: 100%; "><span  style ="color: white;background-color: gold; padding: 10px;">Products</span></h3>
+    <br/>
+    <div class="row">
+
+
+        @{ 
+
+            if (Session["userPosition"].ToString() != "manager")
+            {
+
+        <div style="margin-top:4% ; margin-left:30px;" class="tab-content ">
+
+            <form enctype="multipart/form-data">
+                <label>Product Name</label>
+                <input disabled type="text" name="productName" class="form-control productName" />
+                <label>Product Description</label>
+                <textarea disabled name="descName" class="form-control productDesc"></textarea>
+                <label>Product Price</label>
+                <input disabled name="priceName" type="text" min="1" maxlength="3" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  class="form-control productPrice" />
+                <label>Product Category</label>
+                <select disabled name="productCategory" class="productCategory form-control">
+                    @{
+                        foreach (var a in ViewBag.categoryList)
+                        {
+                            <option value="@a.categoryId">@a.name</option>
+
+                        }
+
+                    }
+
+                </select>
+                <label>Image</label>
+                <br />
+                <input disabled name="prodImage" class="form-control prodImage" type="file" />
+                <br /><br />
+                <button class="btn btn-success openForm">Add Product</button>
+                <button class="btn btn-success submit">Save</button>
+            </form>
+        </div>
+                        }
+                        }
+        <!-- Tab panes -->
+        <div style="margin-top:4% ; margin-left:1%; " class="tab-content ">
+
+
+
+       
+
+            <div class="tab-pane container active" id="home">
+
+                <div class="table-responsive">
+                    @{ 
+
+                        using (Html.BeginForm("GetTheList", "Admin", FormMethod.Post, new { @class = "registrationForm", enctype = "multipart/form-data" }))
+                        {
+
+
+                    <table style="color:black" id="products" class="table table-striped table-bordered nowrap">
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                              
+                                <th>Product Name</th>
+
+                                <th>Product Price</th>
+                                <th>Date Added</th>
+                               
+                                @{
+                                    if (Session["userPosition"].ToString() == "manager")
+                                    {
+                                        <th>Branch Manager</th>
+                                    }
+                                    else
+                                    {
+                                        <th>Action</th>
+                                    }
+                                }
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+
+
+
+                                foreach (var product in ViewBag.productList)
+                                {
+
+                                        <tr>
+                                            <td><input type="checkbox" name="selectedProd" value="@product.productId " /></td>
+                                          
+                                            <td>@product.productName</td>
+
+                                         
+                                            <td>P @string.Format("{0:N2}", product.productPrice) </td>
+                                            <td>@product.dateRegistered</td>
+                                            @{
+                                                if (Session["userPosition"].ToString() == "manager")
+                                                {
+                                                    <td>@product.packageBy</td>
+                                                }
+                                                else
+                                                {
+                                                    <td><a class="btn btn-primary" href="~/Admin/PackageEdit/@product.productId">Edit</a></td>
+                                                }
+                                            }
+                                            @{
+                                                if (product.isArchive == "yes")
+                                                {
+                                                    <td><p style="color:red">unavailable</p></td>
+                                                }
+                                                else
+                                                {
+                                                    <td><p style="color:forestgreen">available</p></td>
+                                                }
+                                            }
+                                          
+                                        </tr>
+
+                                                }
+
+
+
+                                                if (Session["userPosition"].ToString() != "manager")
+                                                {
+                                                        <input class="btn btn-primary" value="Add Package" onclick="return confirm('Are you sure?')" type="submit" name="package" />
+                                                }
+
+
+                                    <input class="btn btn-warning" value="Archive" onclick="return confirm('Are you sure?')" type="submit" name="delete" />
+                                    <input class="btn btn-warning" value="Unarchive" onclick="return confirm('Are you sure?')" type="submit" name="recoverProduct" />
+
+                            }
+
+                        
+
+                        </tbody>
+                    </table>
+                                                }
+                                                }
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <table class="table">
+        <tr>
+        <th>Image</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Branch</th>
+            <th>Number of order</th>
+        </tr>
+        @{
+
+            foreach (var f in ViewBag.besters)
+            {
+                if( f.productPrice != null) { 
+                <tr>
+                    <td><img width="50px" src="~/Content/@f.productImage" alt="img" /> </td>
+                    <td>@f.productName</td>
+                    <td>@f.productPrice</td>
+                    <td>@f.packageBy</td>
+                    <td>@f.bought</td>
+                </tr>
+                }
+            }
+
+        }
+    </table>
+
+</div>
+
+
+<script src="~/Scripts/jquery223.js"></script>
+
+
+<script>
+
+    $('.openForm').click(function () {
+        $('.productName').removeAttr('disabled');
+        $('.productPrice').removeAttr('disabled');
+        $('.productDesc').removeAttr('disabled');
+        $('.productCategory').removeAttr('disabled');
+        $('.prodImage').removeAttr('disabled');
+        return false;
+    });
+
+    $('.submit').click(function () {
+        var fData = new FormData();
+        fData.append('prodName', $('.productName').val());
+        fData.append('productPrice', $('.productPrice').val());
+        fData.append('productDesc', $('.productDesc').val());
+        fData.append('productCategory', $('.productCategory').val());
+        fData.append('prodImage', $('.prodImage')[0].files[0]);
+
+
+        $.ajax({
+
+            url: '../Admin/AddProduct',
+            type: 'post',
+            data: fData,
+            processData: false,
+            contentType: false,
+            success: function (e) {
+          
+                if (e == "noname") {
+                    $.sweetModal({
+                        content: '<h3>Product Name Can\'t be Empty</h3>',
+                        icon: $.sweetModal.ICON_WARNING,
+                        theme: $.sweetModal.THEME_DARK
+                    });
+                    return false;
+                }else if (e == "priceten") {
+                    $.sweetModal({
+                        content: '<h3>Price must not be less than 10</h3>',
+                        icon: $.sweetModal.ICON_WARNING,
+                        theme: $.sweetModal.THEME_DARK
+                    });
+                    return false;
+                } else if (e == "false") {
+                    $.sweetModal({
+                        content: '<h3>Existing Product Name</h3>',
+                        icon: $.sweetModal.ICON_WARNING,
+                        theme: $.sweetModal.THEME_DARK
+                    });
+                    return false;
+                } else if (e == "noDesc") {
+                    $.sweetModal({
+                        content: '<h3>Product Description Can\'t be Empty</h3>',
+                        icon: $.sweetModal.ICON_WARNING,
+                        theme: $.sweetModal.THEME_DARK
+                    });
+                    return false;
+                } else if (e == "noprice") {
+                    $.sweetModal({
+                        content: '<h3>Product Price Can\'t be Empty</h3>',
+                        icon: $.sweetModal.ICON_WARNING,
+                        theme: $.sweetModal.THEME_DARK
+                    });
+                    return false;
+                } else if (e == "added") {
+                    $.sweetModal({
+                        content: '<h3>Product Added</h3>',
+                        icon: $.sweetModal.ICON_SUCCESS,
+                        theme: $.sweetModal.THEME_DARK,
+                        onClose: function () {
+                            window.open("ListProductsAndCategories", "_self")
+                        }
+                    });
+                   
+                }
+            
+             
+
+            }
+
+        });
+        return false;
+
+    });
+
+
+</script>
+
+

@@ -1,0 +1,223 @@
+﻿@using GRM.Models
+
+
+@{
+
+
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/clientMaster.cshtml";
+
+    if (Session["cart"] == null || Session["userName"] == null)
+    {
+<script src = "../../Scripts/jquery223.js"> </script>
+        <script>
+            $(document).ready(function () {
+                $.sweetModal({
+                    content: '<h3>Your cart is empty</h3><br><p>Please order first</p>',
+                    icon: $.sweetModal.ICON_WARNING,
+                    theme: $.sweetModal.THEME_DARK,
+                    onClose: function () {
+                        window.open("../../Client", "_self");
+                    }
+                });
+            });
+        </script>
+
+
+        return;
+    }
+
+}
+
+<style>
+   .list-inline span {
+    
+    padding:70px;
+    font-size:20px;
+    font-weight:bold;
+   }
+</style>
+<style>
+ 
+</style>
+<script src="~/Scripts/jquery223.js"></script>
+<div style="margin-left:18%; margin-top:2%">
+<!-- Nav pills -->
+
+   
+
+@{
+    <!--(List<GRM.Models.tbl_ProductCategories>)-->
+
+
+    <h3 style =" width: 100%; "><span  style ="color: white;background-color: gold; padding: 10px;">Shopping Cart</span></h3>
+    <br/>
+
+
+}
+
+
+</div>
+<div class="container">
+    
+    <div class="row">
+        <div style="margin-left: 18%; margin-top: 2%">
+
+
+
+
+            <table id="cart" class="table table-striped table-bordered nowrap" cellpadding="20%" cellspacing="30px" width="900px">
+            <thead>
+            <tr>
+                <th>IMAGE</th>
+                <th>ITEM</th>
+                <th>QTY</th>
+                <th>PRICE (PHP)</th>
+                <th>TOTAL (PHP)</th>
+                <th>DETAILS</th>
+      <th>ACTION</th>
+
+            </tr>
+            </thead>
+            @using (Html.BeginForm("Checkout", "Client", FormMethod.Post, new {@class = "registrationForm", enctype = "multipart/form-data"}))
+            {
+
+                var s = "qty";
+                var p = "price";
+                var count = 0;
+                var a = s + count;
+                var priceCount = p + count;
+                double? equals = 0;
+
+                foreach (var item in (List<ProductItem>)Session["cart"])
+                {
+                    equals += item.Quantity * item.Product.productPrice;
+                    <tbody>
+                    <tr>
+                        <td width="20%"><img height="70px" width="70px" src="~/Content/@item.Product.productImage"/></td>
+                        <td>@item.Product.productName</td>
+                        <td><input type="text" min="1" maxlength="4" onkeypress='return event.charCode >= 48 && event.charCode <= 57' style="width: 150px;" class="form-control  @a" value="@item.Quantity" name="sendQuantity"/></td>
+
+                        <td class="@priceCount">@item.Product.productPrice</td>
+
+                        <td id="@a"></td>
+
+                        <input type="hidden" name="prodId" value="@item.Product.productId"/>
+                        <input type="hidden" name="price" value="@item.Product.productPrice"/>
+                        <td>
+                            @{ if (item.Product.categoryId == 0)
+                                {
+                                    var db = new GRMDB();
+                                    var selectPackage = db.tbl_PackageItems.Where(x => x.packageId == item.Product.productId).ToList();
+                                    foreach (var pack in selectPackage)
+                                    {
+
+                                       <li> @pack.item x @pack.quantity </li>
+
+                                            }
+                                }
+                                else
+                                {
+                           <li>product</li>
+                                }
+                            }
+                        </td>
+
+                        <input type="hidden" name="prodItem" value="@item.Product.productName"/>
+                        <td><a class="btn btn-danger" href="@Url.Action("Remove", "Client", new {id = item.Product.productId})">Remove</a></td>
+                    </tr>
+                    </tbody>
+                    <script>
+
+
+                        var equals = $('.qty' + @count + '').val() * $('.price' + @count + '').html();
+                        $('#qty' + @count + '').html(equals);
+
+                        $(".qty" + @count + "").change(function(e) {
+                            var equals = $('.qty' + @count + '').val() * $('.price' + @count + '').html();
+                            $('#qty' + @count + '').html(equals);
+
+                            var total = 0;
+
+                            var count = $('.howMany').val();
+                            for (var a = 0; a < count; a++) {
+                                var s = parseInt($('#qty' + a).html());
+                                total += s;
+                                $('.total').text(("₱" + formatNumber(total)));
+                            }
+                        });
+
+
+                    </script>
+
+                    count++;
+                    a = s + count;
+                    priceCount = p + count;
+
+                }
+
+                <input type="hidden" value="@count" class="howMany"/>
+                @Html.Raw("</table>")
+                ;
+                <br/><br/>
+                <h4>Total Amount:</h4>
+                <h3 class="total"></h3>
+                <p>Pick a scheduled delivery.</p>
+                <input type="text" name="date" id="datepicker"><br/>
+                <br/>
+                <input class="btn btn-lg btn-primary" onclick="return confirm('Are you sure you want to checkout ? We will send an invoice to your account if you agree.')" value="Checkout" type="submit"/>
+            }
+
+
+
+
+        </div>
+        <p>
+    </div>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        var total = 0;
+        var equals = 0;
+        var count = $('.howMany').val();
+        for (var a = 0; a < count ; a++) {
+            var s = parseInt($('#qty' + a).html());
+            total += s;
+      
+            $('.total').text(("₱" + formatNumber(total)));
+        }
+
+   
+        $('#datepicker').datepicker({
+            startDate: "+4d",
+            setDate: new Date(),
+            beforeShowDay: unavailable,
+            format: 'yyyy-mm-dd'
+          
+        });
+   
+    });
+   $( function() {
+   
+ 
+
+   });
+   function formatNumber(num) {
+       return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+   }
+
+
+   function unavailable(date) {
+       if (date.getDay() === 0) {
+           return [true, ""];
+       } else {
+           return [false, "", "Unavailable"];
+       }    
+   }
+
+</script>
+

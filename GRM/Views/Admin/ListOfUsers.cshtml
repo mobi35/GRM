@@ -1,0 +1,170 @@
+﻿
+@model GRM.Models.tbl_Users
+@{
+    ViewBag.Title = "ListOfUsers";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+<div style="margin-left:18%; margin-top:2%">
+    <!-- Nav pills -->
+    <h3 style =" width: 100%; "><span  style ="color: white;background-color: gold; padding: 10px;">List of Users</span></h3>
+
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+       
+        <form action="../Admin/RenewAccount" method="post">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Renew Contract</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+
+                    <input class="form-control renewals" name="id" type="hidden" /><br />
+                    <label>Years</label>
+                    <select class="form-control" name="renewz">
+                        <option value="1">1 year</option>
+                        <option value="2">2 years</option>
+                        <option value="3">3 years</option>
+                        <option value="4">4 years</option>
+                        <option value="5">5 years</option>
+                        <option value="6">6 years</option>
+                        <option value="7">7 years</option>
+                        <option value="8">8 years</option>
+                        <option value="9">9 years</option>
+                        <option value="10">10 years</option>
+                        <option value="11">11 years</option>
+                        <option value="12">12 years</option>
+                        <option value="13">13 years</option>
+                        <option value="14">14 years</option>
+                        <option value="15">15 years</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Renew" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="margin-left:18%; margin-top:2%">
+ 
+
+    <!-- Tab panes -->
+    <div style="margin-top:4%; margin-right:3%" class="tab-content">
+
+
+        <input type="text" style="display:none;width:50%;" class="form-control search" />
+        <button style="display:none;position:absolute; margin-top:-2%; margin-left:40%" class="btn btn-toolbar searchButton">Search</button>
+        <br />
+        <div class="tab-pane container active" id="home">
+
+
+
+
+
+            <div class="table-responsive">
+      @{
+          using (Html.BeginForm("GetTheList", "Admin", FormMethod.Post, new { @class = "registrationForm", enctype = "multipart/form-data" }))
+          {
+
+
+            <table style="color:black" id="users" class="table table-striped table-bordered nowrap">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>User Name</th>
+                        <th>Full Name</th>
+                        <th>Email Address</th>
+                        <th>Gender</th>
+                        <th></th>
+                        <th>Position</th>
+                       
+                        <th>Action</th>
+                        <th>Tries</th>
+                        <th>Expiration</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+
+
+
+                        foreach (var user in ViewBag.userModel)
+                        {
+
+                            <tr>
+                                <td><input type="checkbox" name="selectedProd" value="@user.userId " /></td>
+
+                                <td>@user.userName</td>
+                                <td>@user.firstName , @user.lastName</td>
+
+
+                                <td>@user.emailAddress</td>
+                                <td>@user.gender</td>
+                                <td>@user.dti_or_sec</td>
+                                <td>@user.position</td>
+                                <td><a class="btn btn-primary" href="~/Admin/EditUser/@user.userId">Edit</a></td>
+                                <td><a class="btn btn-info" href="~/Admin/ResetTries/@user.userId">Reset Tries</a></td>
+                             @{
+                                 try
+                                 {
+                                     if (user.contract_duration == null)
+                                     {
+
+                                         if (user.position != "manager" && user.contract_duration == null || user.dateRegistered.Value.AddYears(user.contract_duration.Value) < DateTime.Now)
+                                         {
+
+                                            <td>  <button type="button" class="btn btn-info btn-lg" onclick="ModalUser(@user.userId)" data-toggle="modal" data-target="#myModal">Renew</button></td>
+                                         }
+
+                                     }
+                                     else
+                                     {
+                                        <td>
+                                            <h4 style="color:green"> Active </h4>
+                                        </td>
+                                     }
+                                 }
+                                 catch (Exception e)
+                                 {
+
+                                    <td>
+                                        <h4 style = "color:green" > Active </h4>
+                                    </td>
+
+                                 }
+                            }
+</tr>
+
+                                 }
+                    }
+
+                </tbody>
+            </table>
+                        } }
+               
+            </div>
+
+
+        </div>
+
+   
+        <script>
+            function ModalUser(x) {
+                $('.renewals').val(x);
+            }
+
+    $('.searchButton').click(function () {
+        var search = $('.search').val();
+      
+        location.href = '@Url.Action("ListOfUsers", "Admin")?search=' + search + '&i=' + 1;
+    });
+        </script>

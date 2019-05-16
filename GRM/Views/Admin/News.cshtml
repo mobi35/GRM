@@ -1,0 +1,45 @@
+﻿@model GRM.Models.tbl_News
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+<div style="margin-left:18%; margin-top:2%">
+    <!-- Nav pills -->
+    <h3 style =" width: 100%; "><span  style ="color: white;background-color: gold; padding: 10px;">News</span></h3>
+
+</div>
+<div style="margin-left:20%; width:50%; margin-top:3%">
+
+<div style="width:50%; margin-top:3%">
+    @using (Html.BeginForm("News", "Admin", FormMethod.Post, new { @class = "registrationForm", enctype = "multipart/form-data" }))
+    {
+
+        <h5>News Title</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.title)</p>
+     
+          @Html.TextBoxFor(model => model.title, new { @class = "form-control", style = "margin-bottom:2%;" })
+        <h5>Featured Image</h5>
+          <input type="file" name="featureImage" />
+       
+            @Html.Raw("</div>")
+        <h5>News Content</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.content)</p>
+
+          <center>
+                @Html.TextAreaFor(model => model.content, new { @id = "text2", @class = "texta", @rows = "20", @style = "width:1600px!important" });
+
+            </center>
+            <input  type="submit" class="btn btn-primary registerButton" />
+    }
+
+
+</div>
+    <br /><br />
+<script>
+
+    tinymce.init({
+        selector: 'textarea'
+
+    });
+</script>
+

@@ -1,0 +1,151 @@
+﻿
+@model GRM.Models.tbl_Products
+
+@{
+    ViewBag.Title = "Package";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+
+
+<div style="margin-left:18%; margin-top:2%">
+    <!-- Nav pills -->
+    <h3 style =" width: 100%; "><span  style ="color: white;background-color: gold; padding: 10px;">Packages</span></h3>
+    <br/>
+    <!-- Tab panes -->
+    <div style="margin-top:4%; margin-right:3%" class="tab-content">
+
+        <div class="tab-pane container active" id="home">
+
+            <div class="table-responsive">
+@{
+    using (Html.BeginForm("GetTheList", "Admin", FormMethod.Post, new { @id = "formko", @class = "registrationForm", enctype = "multipart/form-data" }))
+    {
+
+        <table style="color:black" id="packages" class="table table-striped table-bordered nowrap">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Product ID</th>
+                    <th>Package Name</th>
+
+                    <th>Product Price</th>
+                    @{
+                        if (Session["userPosition"].ToString() == "manager")
+                        {
+                            <th>Branch Manager</th>
+                        }
+                    }
+                    <th>Date Created</th>
+                 
+                       
+                            <th>Action</th>
+                      
+                    <th>Action</th>
+                    @{
+                        if (Session["userPosition"].ToString() != "manager")
+                        {
+                          
+<th>Status</th>
+                        }
+                    }
+                    
+                </tr>
+            </thead>
+            <tbody>
+
+                @{
+
+
+
+                    foreach (var product in ViewBag.packageList)
+                    {
+
+                        <tr>
+                            <td><input type="checkbox" name="selectedProd" value="@product.productId " /></td>
+
+                            <td>@product.productId</td>
+                            <td>@product.productName</td>
+
+                            <td>P @string.Format("{0:N2}", product.productPrice) </td>
+                            @{
+                                if (Session["userPosition"].ToString() == "manager")
+                                {
+                                    <td>@product.packageBy</td>
+                                }
+                            }
+                            <td>@product.dateRegistered</td>
+                            @{
+                                if (Session["userPosition"].ToString() != "manager")
+                                {
+                                    <td><a class="btn btn-primary" href="~/Admin/PackageEdit/@product.productId">Edit</a></td>
+                                    <td><a class="btn btn-primary" onclick="ViewPackage(@product.productId);" href="#">View</a></td>
+                                }
+                                else
+                                {
+                                    <td><a class="btn btn-primary" onclick="ViewPackage(@product.productId);" href="#">View</a></td>
+                                }
+                            }
+                            @{
+                                if (product.isArchive == "yes")
+                                {
+                                    <td><p style="color:red">unavailable</p></td>
+                                }
+                                else
+                                {
+                                    <td><p style="color:forestgreen">available</p></td>
+                                }
+                            }
+                        </tr>
+
+                                }
+                                <input class="btn btn-warning" value="Archive" onclick="return confirm('Are you sure?')" type="submit" name="deletePackage" />
+                                <input class="btn btn-warning" value="Unarchive" onclick="return confirm('Are you sure?')" type="submit" name="recoverPackage" />
+
+                }
+
+
+
+            </tbody>
+        </table>
+                                } }
+              
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<div style="display:none;" id="burat">
+
+</div>
+
+
+<script>
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+    }
+    function ViewPackage(x) {
+      
+        $.ajax({
+            type: 'post',
+            url: '../../Admin/ViewPackage/',
+            data:{id:x},
+            success: function (e) {
+              
+                $('#burat').html(e);
+                var content = document.getElementById('burat').innerHTML;
+                $.sweetModal({
+                    title: 'Package',
+                    content: content    
+                });
+            }
+
+        });
+
+      
+
+
+    }
+
+</script>

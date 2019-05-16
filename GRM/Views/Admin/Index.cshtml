@@ -1,0 +1,855 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+
+
+}
+
+
+
+<main role="main" id="printMoto"  class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+
+
+
+    @{
+        if (Session["userPosition"].ToString() == "branchmanager")
+        {
+
+        }
+        else
+        {
+
+            <div class="container">
+                <center><h1 id="feedbackLabel" style="display:none;">Client's Feedback</h1></center>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card1">
+
+                            <h2>Services</h2>
+                            <h4>@ViewBag.TotalService / 10</h4>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card2">
+
+                            <h2>Quality</h2>
+                            <h4>@ViewBag.TotalQuality / 10</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card3">
+
+                            <h3>Price Fairness</h3>
+                            <h4>@ViewBag.TotalImprovement /10</h4>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card4">
+
+                            <h4>Customer's Satisfaction</h4>
+                            <h4>@ViewBag.TotalSatisfaction /10</h4>
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="print-feedback" style=" width:100%; margin-top:3%">
+                        <div class="table-responsive">
+                            <table id="rating" class="table table-striped table-bordered nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Services</th>
+                                        <th>Quality</th>
+                                        <th>Price Improvement</th>
+                                        <th>Messages</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @{
+
+                                        foreach (var rateList in ViewBag.RatingList)
+                                        {
+
+                                            <tr>
+                                                <td>@rateList.client</td>
+                                                <td>@rateList.services / 10</td>
+                                                <td>@rateList.quality / 10</td>
+                                                <td>@rateList.price_improvement / 10</td>
+                                                <td>@rateList.message</td>
+                                                <td>@rateList.date_rated</td>
+
+                                            </tr>
+
+                                        }
+                                    }
+
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        }
+    }
+<br /><Br />
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        @if (Session["userPosition"].ToString() == "manager")
+        {
+
+
+
+        <form class="datings " method="post" action="../../Admin/Index">
+            <div class="row">
+                Branch
+                <div class="col">
+                    <select style name="branchManager" class="form-control stats">
+                        <option value="">All</option>
+
+                        @{
+                            foreach (var s in ViewBag.branches)
+                            {
+                                <option value="@s.userName">@s.userName</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+
+                Year
+                <div class="col">
+                    <select  name="year" class="form-control stats">
+
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                    </select>
+                </div>
+                Month
+                <div class="col">
+                    <select name="months" class="mon form-control">
+
+                        <option value="01">January</option>
+                        <option value="02">February</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="12">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+                <input class="btn btn-success" type="submit" />
+            </div>
+
+
+        </form>
+
+        <br />
+        <h3>@ViewBag.year - @ViewBag.months / Branch: @ViewBag.branch</h3>
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3>Your Client(s)</h3>
+                                    </div>
+
+                                    <ul>
+                                        @{
+                                            foreach (var cc in ViewBag.MyClients)
+                                            {
+                                                <li>@cc.userName</li>
+                                              
+                                            }
+
+                                        }
+
+                                    </ul>
+                                </div>
+                                            }
+                               
+
+
+
+
+        <div class="btn-toolbar mb-2 mb-md-0">
+
+            <style type="text/css">
+                .card1 {
+                    background-color: lightblue;
+                    height: 100px;
+                    width: 100%;
+                    text-align: center;
+                    box-shadow: 3px 6px;
+                }
+                .card2 {
+                    background-color: lightgreen;
+                    height: 100px;
+                    width: 100%;
+                    text-align: center;
+                    box-shadow: 3px 6px;
+                }
+                .card3 {
+                    background-color: orange;
+                    height: 100px;
+                    width: 100%;
+                    text-align: center;
+                    box-shadow: 3px 6px;
+                }
+
+                .card4 {
+                    background-color: gold;
+                    height: 100px;
+                    width: 100%;
+                    text-align: center;
+                    box-shadow: 3px 6px;
+                }
+
+
+
+
+            </style>
+        </div>
+
+    </div>
+    @{
+        if (Session["userName"].ToString() == "admin" || Session["userPosition"].ToString() == "manager")
+        {
+            <button class="btn btn-success" id="printChart">Print Chart</button>
+            <center><h1 style="display:none;" id="chartLabel">GRM Chart Reports</h1></center>
+            <div class="row " >
+              
+                <div class="col-md-6">
+                    <div style="width: 100%">
+                        <canvas id="lineChart" height="400" width="400"></canvas>
+
+                    </div>
+                 
+                   <a href="../../Admin/RawData" class="btn btn-success">Print</a>
+                </div>
+                <div class="col-md-6">
+                  
+                    <div class="monthly" style="width: 100%">
+                    
+                        <canvas id="barMonth" class="a_monthly"  height="400" width="400"></canvas>
+                    </div>
+                    <div class="yearly">
+                      
+                        <div style="width: 100%">
+                          
+                            <canvas id="yearly" class="a_yearly" height="400" width="400"></canvas>
+
+                        </div>
+                          </div>
+                    <div class="quarterly">
+                        <div style="width: 100%">
+                            <canvas id="quarter" height="400" width="400"></canvas>
+
+                        </div>
+                    </div>
+                  
+                    <div class="daily">
+                        <div style="width: 100%">
+                            <canvas id="daily" height="400" width="400"></canvas>
+
+                        </div>
+
+                    </div>
+                    <button id="dailyButton">Daily</button>
+                    <button id="monthlyButton">Monthly</button>
+                    <button id="quarterlyButton">Quarterly</button>
+
+                    <button id="yearButton">Yearly</button>
+                    <form method="post" action="../../Admin/RawInquiries">
+                        <input type="hidden" value="@ViewBag.year"  class="p_year" name="p_year" />
+                        <input type="hidden" value="@ViewBag.months"  class="p_month"  name="p_month" />
+                        <input type="hidden" value="@ViewBag.branch"  class="p_branch" name="p_branch" />
+                        <input type="hidden" value="inq_daily"  class="p_type" name="p_type" />
+                        <input type="submit" value="Print" class="btn btn-success" />
+                    </form>   
+                </div>
+
+            </div>
+            <br /><br />
+       
+
+                          
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="monthlyLines" style="width: 100%">
+                        <canvas id="salesLineMonthly" height="400" width="400"></canvas>
+                    </div>
+                    <div class="yearlyLines">
+                        <div style="width: 100%">
+                            <canvas id="salesLineYearly" height="400" width="400"></canvas>
+
+                        </div>
+
+                    </div>
+                    <div class="quarterlyLines">
+                        <div style="width: 100%">
+                            <canvas id="salesLineQuarter" height="400" width="400"></canvas>
+
+                        </div>
+
+                    </div>
+                    <div class="dailyLines">
+                        <div style="width: 100%">
+                            <canvas id="salesLineDaily" height="400" width="400"></canvas>
+
+                        </div>
+
+                    </div>
+                    <button id="dailyButtonLines">Daily</button>
+                    <button id="monthlyButtonLines">Monthly</button>
+                    <button id="quarterlyButtonLines">Quarterly</button>
+
+                    <button id="yearButtonLines">Yearly</button>
+                    <form method="post" action="../../Admin/RawSales">
+                        <input type="hidden" value="@ViewBag.year" class="m_year" name="m_year" />
+                        <input type="hidden" value="@ViewBag.months" class="m_month" name="m_month" />
+                        <input type="hidden" value="@ViewBag.branch" class="m_branch" name="m_branch" />
+                        <input type="hidden" value="sales_daily" class="m_type" name="m_type" />
+                        <input type="submit" value="Print" class="btn btn-success" />
+                    </form>   
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="bestSelling">
+                        <div style="width: 100%">
+                            <canvas id="bestSelling" height="400" width="400"></canvas>
+
+                        </div>
+                        <form method="post" action="../../Admin/RawBestSeller">
+                            <input type="hidden" value="@ViewBag.branch" name="branchManager" />
+                            <input type="submit" value="Print" class="btn btn-success" />
+                        </form> 
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+        }
+
+    }
+
+
+
+
+
+
+    <script src="~/Scripts/chart.min.js"></script>
+    <script>
+        var label = @Html.Raw(Json.Encode(ViewBag.label));
+
+        var data = @Html.Raw(Json.Encode(ViewBag.data));
+
+        var CHART = document.getElementById("lineChart");
+
+        var lineChart = new Chart(CHART,
+            {
+                type: 'bar',
+                data: {
+                    labels: label,
+                    datasets: [
+                        {
+                            data: data,
+                            label: "Total Sales of every branch",
+                            backgroundColor: "#3e95cd",
+                            borderColor: "#3e95cd",
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    title: {
+                        display: true,
+                        maintainAspectRatio: false
+                    }
+                }
+
+
+            });
+    </script>
+
+
+    <script>
+
+
+        var inquiryData = @Html.Raw(Json.Encode(ViewBag.InquiryData));
+        var CH = document.getElementById("barMonth");
+
+        var bar = new Chart(CH,
+            {
+                type: 'bar',
+                data: {
+                    labels: [
+                        "January", "February", "March", "April", "May", "June", "July", "August", "September",
+                        "October", "November", "December"
+                    ],
+                    datasets: [
+                        {
+                            data: inquiryData,
+                            label: "Inquiries (Monthly)",
+                            backgroundColor: "#3e95cd",
+                            borderColor: "#3e95cd",
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    title: {
+                        display: true,
+                        maintainAspectRatio: false
+                    }
+                }
+
+
+            });
+    </script>
+
+
+
+    <script>
+
+
+        var inquiryLabel = @Html.Raw(Json.Encode(ViewBag.yearly));
+        var inquiryData = @Html.Raw(Json.Encode(ViewBag.yearlyData));
+        var SH = document.getElementById("yearly");
+
+        var ds = new Chart(SH,
+            {
+                type: 'pie',
+                data: {
+                    labels: inquiryLabel,
+                    datasets: [
+                        {
+                            data: inquiryData,
+                            label: "Inquiries (Yearly)",
+                            backgroundColor: [
+                                "#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f",
+                                "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"
+                            ],
+
+                            borderColor: "#3e95cd",
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    title: {
+                        display: true,
+                        maintainAspectRatio: false
+                    }
+                }
+
+
+            });
+    </script>
+
+
+    <script>
+
+
+        var inquiryDataQuarter = @Html.Raw(Json.Encode(ViewBag.inquiryPerQuarter));
+        var QUA = document.getElementById("quarter");
+
+        var Qu = new Chart(QUA,
+            {
+                type: 'bar',
+                data: {
+                    labels: ["Q1", "Q2", "Q3", "Q4"],
+                    datasets: [
+                        {
+                            data: inquiryDataQuarter,
+                            label: "Inquiries (Quarterly)",
+                            backgroundColor: "#3e95cd",
+                            borderColor: "#3e95cd",
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    title: {
+                        display: true,
+                        maintainAspectRatio: false
+                    }
+                }
+
+
+            });
+
+
+    </script>
+
+
+
+    <script>
+
+
+        var inquiryPerLabel = @Html.Raw(Json.Encode(ViewBag.inquiryPerDayLabel));
+        var inquiryPerDay = @Html.Raw(Json.Encode(ViewBag.inquiryPerDay));
+
+        var ZXC = document.getElementById("daily");
+
+        var Qr = new Chart(ZXC,
+            {
+                type: 'bar',
+                data: {
+                    labels: inquiryPerLabel,
+                    datasets: [
+                        {
+                            data: inquiryPerDay,
+                            label: "Inquiries (Daily)",
+                            backgroundColor: "#3e95cd",
+                            borderColor: "#3e95cd",
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    title: {
+                        display: true,
+                        maintainAspectRatio: false
+                    }
+                }
+
+            });
+
+    </script>
+
+
+    <script>
+
+
+        var grossSalesMonthly = @Html.Raw(Json.Encode(ViewBag.grossSalesMonthly));
+        var WSD = document.getElementById("salesLineMonthly");
+
+        var sdf = new Chart(WSD,
+            {
+                type: 'line',
+                data: {
+                    labels: [
+                        "January", "February", "March", "April", "May", "June", "July", "August", "September",
+                        "October", "November", "December"
+                    ],
+                    datasets: [
+                        {
+                            data: grossSalesMonthly,
+                            label: "Total Sales (Monthly)",
+                            backgroundColor: "lightgreen",
+                            borderColor: "#3e95cd",
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    title: {
+                        display: true,
+                        maintainAspectRatio: false
+                    }
+                }
+
+
+            });
+    </script>
+
+
+    <script>
+
+
+        var grossSalesYearlyLine = @Html.Raw(Json.Encode(ViewBag.yearlyDataLine));
+        var grossSalesYearlyLabel = @Html.Raw(Json.Encode(ViewBag.yearlyLine));
+        var WEWS = document.getElementById("salesLineYearly");
+
+        var zxc = new Chart(WEWS,
+            {
+                type: 'line',
+                data: {
+                    labels: grossSalesYearlyLabel,
+                    datasets: [
+                        {
+                            data: grossSalesYearlyLine,
+                            label: "Total Sales (Yearly)",
+                            backgroundColor: "lightgreen",
+                            borderColor: "#3e95cd",
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    title: {
+                        display: true,
+                        maintainAspectRatio: false
+                    }
+                }
+
+
+            });
+    </script>
+
+
+
+    <script>
+
+
+        var inquiryPerQuarterLines = @Html.Raw(Json.Encode(ViewBag.inquiryPerQuarterLines));
+        var WWS = document.getElementById("salesLineQuarter");
+
+        var ws = new Chart(WWS,
+            {
+                type: 'line',
+                data: {
+                    labels: ["Q1", "Q2", "Q3", "Q4"],
+                    datasets: [
+                        {
+                            data: inquiryPerQuarterLines,
+                            label: "Total Sales (Quarterly)",
+                            backgroundColor: "lightgreen",
+                            borderColor: "#3e95cd",
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    title: {
+                        display: true,
+                        maintainAspectRatio: false
+                    }
+                }
+
+
+            });
+    </script>
+
+
+
+
+    <script>
+
+        var inquiryPerDayLines = @Html.Raw(Json.Encode(ViewBag.inquiryPerDayLines));
+        var inquiryPerDayLabelLines = @Html.Raw(Json.Encode(ViewBag.inquiryPerDayLabelLines));
+
+        var linz = document.getElementById("salesLineDaily");
+
+        var xx = new Chart(linz,
+            {
+                type: 'line',
+                data: {
+                    labels: inquiryPerDayLabelLines,
+                    datasets: [
+                        {
+                            data: inquiryPerDayLines,
+                            label: "Total Sales (Daily)",
+                            backgroundColor: "lightgreen",
+                            borderColor: "#3e95cd",
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    title: {
+                        display: true,
+                        maintainAspectRatio: false
+                    }
+                }
+
+
+            });
+    </script>
+
+
+
+
+    <script>
+
+        var labelBestProducts = @Html.Raw(Json.Encode(ViewBag.labelBestProducts));
+        var listBestProducts = @Html.Raw(Json.Encode(ViewBag.listBestProducts));
+
+        var wwww = document.getElementById("bestSelling");
+
+        var xz = new Chart(wwww,
+            {
+                type: 'bar',
+                data: {
+                    labels: labelBestProducts,
+                    datasets: [
+                        {
+                            data: listBestProducts,
+                            label: "Best Selling Products",
+                            backgroundColor: "red",
+                            borderColor: "#3e95cd",
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    title: {
+                        display: true,
+                        maintainAspectRatio: false
+                    }
+                }
+
+
+            });
+
+
+        function PrintImage(elem) {
+            var canvas = document.getElementById("yearly");
+            var win = window.open();
+            win.document.write("<br><img src='" + canvas.toDataURL() + "'/>");
+            win.print();
+            win.location.reload();
+
+        }
+
+   
+
+    </script>
+
+
+
+
+</main>

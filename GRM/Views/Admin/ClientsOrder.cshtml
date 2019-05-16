@@ -1,0 +1,53 @@
+﻿
+@model GRM.Models.tbl_OrderHistory
+@{
+    ViewBag.Title = "ClientsOrder";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+
+<div style="margin-left:18%; margin-top:2%">
+    <!-- Nav pills -->
+    <h3 style =" width: 100%; "><span  style ="color: white;background-color: gold; padding: 10px;">Client's Order</span></h3>
+    <br/>
+</div>
+<div style="margin-left:20%; width:75%; margin-top:3%">
+    <div class="table-responsive">
+        <table style="color:black" id="orders" class="table table-striped table-bordered nowrap">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Price</th>
+                    <th>Date</th>
+                    <th>Delivery Date</th>
+                  
+                    <th>Invoice</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @{
+
+                    foreach (var ord in ViewBag.orderHistory)
+                    {
+
+                        <tr>
+                            <td>@ord.orderId</td>
+                            <td>@ord.totalPrice</td>
+                            <td>@ord.dateRegistered</td>
+                            <td>@ord.deliveryDate</td>
+                           
+                           
+                            <td><a href="~/Admin/Invoice/@ord.orderId">Invoice</a></td>
+                        </tr>
+
+                                    }
+                }
+
+
+
+            </tbody>
+        </table>
+       
+    </div>
+
+</div>

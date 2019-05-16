@@ -1,0 +1,83 @@
+﻿@model GRM.Models.tbl_Users
+@{
+    ViewBag.Title = "Forgot Password";
+
+    // This condition handles the null throws.
+    // iccheck ng system kung may laman ba ung Session ng userPosition bago nya irun ung condition
+    // sa baba. If empty kase ang isang Session magkakaroon ng exception so dapat may laman muna.
+    if (Session["userPosition"] != null)
+    {
+        //Perform a condition when the users is already logon.
+        if (Session["userPosition"].ToString() == "client")
+        {
+            //Redirect to the Client page
+            //   "  ../ " means up folder.
+            Response.Redirect("../Client/");
+        }
+        else if (Session["userPosition"].ToString() == "admin")
+        {
+            Response.Redirect("../Admin/");
+        }
+        else if (Session["userPosition"].ToString() == "branchmanager")
+        {
+            Response.Redirect("../Admin/");
+        }
+        else if (Session["userPosition"].ToString() == "employee")
+        {
+            Response.Redirect("../Admin/");
+        }
+
+    }
+}
+<style>
+    .validator {
+        color: #EF4836;
+    }
+</style>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>GRM</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/Content/bootstrap/css/signin.css" rel="stylesheet">
+</head>
+
+<body style="background: url('../images/bg.jpg'); background-size: contain; background-repeat:no-repeat" class="text-center">
+
+    @using (Html.BeginForm("ForgotPasssword", "Home", FormMethod.Post, new { @class = "form-signin" }))
+    {
+        <img class="mb-4" src="~/Content/bootstrap/image/logo.png" alt="" width="210" height="210">
+        <h1 style="color: white;" class="h3 mb-3 font-weight-normal">Please fill up your email address so we can confirm your account.</h1>
+
+
+        @Html.TextBoxFor(model => model.emailAddress, new { @class = "form-control", @id = "inputEmail", @Placeholder = "Email" })
+        <p class="validator">@Html.ValidationMessageFor(model => model.emailAddress)</p>
+
+
+
+   
+            <p class="validator">@Html.DisplayFor(model => model.outputMessage)</p>
+  
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        <a class="btn btn-lg btn-success btn-block" href ="Index">Home</a>
+            <p style="color: white!important;" class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+            }
+
+</body>
+</html>
+
+
+
+<script src="~/Scripts/jquery223.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

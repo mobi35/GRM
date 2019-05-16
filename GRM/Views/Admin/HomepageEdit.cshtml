@@ -1,0 +1,61 @@
+﻿@model GRM.Models.PageContent
+@{
+    ViewBag.Title = "HomepageEdit";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+<div style="margin-left:18%; margin-top:2%">
+    <!-- Nav pills -->
+    <h3 style =" width: 100%; "><span  style ="color: white;background-color: gold; padding: 10px;">Edit Homepage</span></h3>
+
+</div>
+<div style="margin-left:20%; width:50%; margin-top:3%">  
+
+    <div style="width:50%; margin-top:3%">
+    @using (Html.BeginForm("HomePageExecute", "Admin", FormMethod.Post, new { @class = "registrationForm", enctype = "multipart/form-data" }))
+    {
+
+        <h5>Which Module</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.location)</p>
+            @Html.DropDownListFor(model => model.location, new List<SelectListItem> {
+       new SelectListItem { Text = "First Column", Value = "1" },
+       new SelectListItem { Text = "Second Column", Value = "2" },
+        new SelectListItem { Text = "Third Column", Value = "3" },
+         new SelectListItem { Text = "Fourth Column", Value = "4" },
+          new SelectListItem { Text = "Fifth Column", Value = "5" },
+           new SelectListItem { Text = "Sixth Column", Value = "6" },
+           new SelectListItem { Text = "Services 1 Column", Value = "7" },
+           new SelectListItem { Text = "Services 2 Column", Value = "8" },
+           new SelectListItem { Text = "Services 3 Column", Value = "9" },
+           new SelectListItem { Text = "Services 4 Column", Value = "10" },
+             new SelectListItem { Text = "Services 5 Column", Value = "11" },
+               new SelectListItem { Text = "Services 6 Column", Value = "12" },
+                 new SelectListItem { Text = "Services 7 Column", Value = "13" },
+                   new SelectListItem { Text = "Services 8 Column", Value = "14" },
+                     new SelectListItem { Text = "Services 9 Column", Value = "15" },
+   }, new { @name = "thirdy", @class = "form-control thirds", style = "margin-bottom:2%;" })
+
+        <input type="file" name="image" />
+
+          
+        @Html.Raw("</div>")
+            <center>
+                @Html.TextAreaFor(model => model.contents, new { @id = "text2", @class = "texta", @rows = "20", @style = "width:1600px!important" });
+
+            </center>
+
+            <input  type="submit" class="btn btn-primary registerButton" />
+    }
+      
+  
+</div>
+
+<script>
+ 
+    tinymce.init({
+        selector: 'textarea'
+       
+    });
+            </script>
+
+
+

@@ -1,0 +1,193 @@
+﻿
+@model GRM.Models.ProductAndCategories
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+
+<style>
+    .validator {
+        color: #EF4836;
+    }
+
+ 
+</style>
+
+<div style="margin-left:18%; margin-top:2%">
+    <!-- Nav pills -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="prodLink nav-link active" data-toggle="pill" href="#home">Products</a>
+        </li>
+        <li class="nav-item">
+            <a class="catLink nav-link" data-toggle="pill" href="#menu1">Categories</a>
+        </li>
+
+    </ul>
+
+    <!-- Tab panes -->
+    <div style="margin-top:4%; margin-right:3%" class="tab-content">
+
+
+        <div class="tab-pane container active" id="home">
+        
+          
+            @using (Html.BeginForm("AddProduct", "Admin", FormMethod.Post, new { @class = "registrationForm", enctype = "multipart/form-data" }))
+            {
+
+
+                   <div class="errorProduct alert alert-danger" >@Html.DisplayFor(model => model.product_model.errorMessage, new { @class = "outputMessage" })</div>
+                <div  class="successProduct alert alert-success"  >@Html.DisplayFor(model => model.product_model.successMessage, new { @class = "outputMessage" })</div>
+
+
+                <div style=" width:50%; margin-top:3%">
+
+
+                    <h5> @Html.LabelFor(Model => Model.product_model.productName)</h5>
+                    <p class="validator">@Html.ValidationMessageFor(model => model.product_model.productName)</p>
+                    @Html.TextBoxFor(model => model.product_model.productName, new { @class = "form-control", style = "margin-bottom:2%;" })
+
+                    <h5> @Html.LabelFor(model => model.product_model.productDescription)</h5>
+   
+                    <center>
+                        @Html.TextAreaFor(model => model.product_model.productDescription, new { @id = "text2", @class = "texta", @rows = "20", @style = "width:1600px!important" });
+
+                    </center>
+
+
+                    <h5> @Html.LabelFor(model => model.product_model.productPrice)</h5>
+                    <p class="validator">@Html.ValidationMessageFor(model => model.product_model.productPrice)</p>
+                    @Html.TextBoxFor(model => model.product_model.productPrice, new { @class = "form-control", style = "margin-bottom:2%;" })
+                    
+                 
+                  
+                    <h5>  @Html.LabelFor(model => model.product_model.categoryId)</h5>
+
+           <!-- We will output GetDropDown() here. We are pointing the path of GetDropDown from the controller on the second arguments. which is GRM.Controllers.Admincontroler.GetDropDown() -->
+           @Html.DropDownListFor(model => model.product_model.categoryId, GRM.Controllers.AdminController.GetDropDown(), new { @class = "form-control" })
+
+
+                    <input type="file" name="productImage" class="form-control"/>
+
+
+           
+             
+                    <br />
+
+                    <input type="submit" class="btn btn-primary" />
+
+                </div>
+                <br /><br /><br /><br /><br />
+            }
+        
+        
+        </div>
+
+
+
+
+        <div class="tab-pane container fade" id="menu1">
+
+
+            @using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post, new { @class = "registrationForm", enctype = "multipart/form-data" }))
+            {
+
+
+                <div class="errorCategory alert alert-danger" >@Html.DisplayFor(model => model.category_model.errorMessage, new { @class = "outputMessage" })</div>
+                    <div class="successCategory alert alert-success" >@Html.DisplayFor(model => model.category_model.successMessage, new { @class = "outputMessage" })</div>
+
+
+                <div style=" width:50%; margin-top:3%">
+                 
+
+                    <h5> @Html.LabelFor(model => model.category_model.name)</h5>
+                    <p class="validator">@Html.ValidationMessageFor(model => model.category_model.name)</p>
+                    @Html.TextBoxFor(model => model.category_model.name, new { @class = "form-control", style = "margin-bottom:2%;" })
+
+                    <h5> @Html.LabelFor(model => model.category_model.description)</h5>
+                    <p class="validator">@Html.ValidationMessageFor(model => model.category_model.description)</p>
+                    @Html.TextBoxFor(model => model.category_model.description, new { @class = "form-control", style = "margin-bottom:2%;" })
+
+
+
+
+
+
+                    <br />
+
+                    <input type="submit" class="btn btn-primary registerButton2" />
+
+                </div>
+                <br /><br /><br /><br /><br />
+            }
+
+
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery223.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+   
+
+        if ($('.successCategory').text() == "Category Added") {
+            $('.successCategory').css("cssText", "display:block !important");
+            $('.catLink').addClass("active show");
+            $('.prodLink').removeClass("active show");
+            $('#home').removeClass("active");
+            $('#home').removeClass("show");
+            $('#menu1').addClass("active show");
+        } else {
+            $('.successCategory').css("cssText", "display:none !important");
+        }
+
+        if ($('.errorCategory').text() == "The category name is already taken") {
+            $('.errorCategory').css("cssText", "display:block !important");
+            $('.catLink').addClass("active show");
+            $('.prodLink').removeClass("active show");
+            $('#home').removeClass("active");
+            $('#home').removeClass("show");
+            $('#menu1').addClass("active show");
+        } else {
+            $('.errorCategory').css("cssText", "display:none !important");
+
+        }
+   
+
+    if ($('.successProduct').text() == "Product Added") {
+        $('.successProduct').css("cssText", "display:block !important");
+      
+    } else {
+        $('.successProduct').css("cssText", "display:none !important");
+    }
+
+    if ($('.errorProduct').text() == "The name is already taken") {
+        $('.errorProduct').css("cssText", "display:block !important");
+   
+    } else {
+        $('.errorProduct').css("cssText", "display:none !important");
+    }
+    });
+    
+
+
+
+
+</script>
+
+<script>
+
+    tinymce.init({
+        selector: 'textarea'
+
+    });
+</script>

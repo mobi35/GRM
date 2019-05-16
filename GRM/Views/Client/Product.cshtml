@@ -1,0 +1,71 @@
+﻿
+@{
+
+    if (Session["userId"] == null)
+    {
+
+        Response.Redirect("~/Home/");
+        return;
+
+    }
+
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/clientMaster.cshtml";
+}
+<br />
+
+<div style="padding-left: 14%" class="container">
+
+    <div class="row">
+        <div class="col-xs-4 item-photo">
+            <img style="margin-right: 4%; height: 300px; max-width: 50%;" src="~/Content/@ViewBag.Details.productImage"/>
+        </div>
+        <div class="col-xs-5" style="margin-right: 40% !important; border: 0px solid gray">
+
+            <h3>@ViewBag.Details.productName</h3>
+
+            <!-- Precios -->
+            <h6 class="title-price"><small>PRICE</small></h6>
+
+            <h3 style="margin-top: 0px;">P @ViewBag.Details.productPrice</h3>
+
+            <table>@{ 
+<tr><th>Item</th><th>Quantity</th></tr>
+
+                if (ViewBag.Details.categoryId == 0)
+                {
+                    foreach (var pack in ViewBag.Package)
+                    {
+                        <tr><td>@pack.item</td><td>@pack.quantity</td></tr>
+                    }
+                }
+                else
+                {
+                  
+                }
+
+            }</table>
+
+            <!-- Botones de compra -->
+            <div class="section" style="padding-bottom: 20px;">
+                <a href="#" onclick="return AddToCart('@ViewBag.Details.productId')" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</a>
+
+            </div>
+        </div>
+
+        <div class="col-xs-9 col-md-9">
+            <br/><br/>
+            <div style="width: 100%; border-top: 1px solid silver">
+                <p style="margin-top: -5% !important; padding: 15px;">
+
+                    @Html.Raw(ViewBag.Details.productDescription)
+
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+

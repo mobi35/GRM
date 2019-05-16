@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/clientMaster.cshtml";
+    
+}
+<script src="~/Scripts/jquery223.js"></script>
+<script src="~/Scripts/jquery.sweet-modal.js"></script>
+<link href="~/Scripts/jquery.sweet-modal.css" rel="stylesheet" />
+<script>
+
+    $.sweetModal({content: '<h3>You have successfully ordered.</h3><br><p>Please check My Order Tab to view your order.</p>',icon: $.sweetModal.ICON_SUCCESS,theme: $.sweetModal.THEME_DARK,onClose: function () {window.open('../Client/MyOrders', '_self'); }});
+
+
+</script>

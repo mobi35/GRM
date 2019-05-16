@@ -1,0 +1,124 @@
+﻿<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<button  class="print btn btn-success">Print</button><br />
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="row p-5">
+                        <div class="col-md-6">
+                            <img width="50%" src="~/Content/logo.png">
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p class="font-weight-bold mb-1">Invoice #@ViewBag.MainOrder.orderId</p>
+                           
+                        </div>
+                    </div>
+                    <hr class="my-5">
+                    <div class="row pb-5 p-5">
+                        <div class="col-md-6">
+                            <p class="font-weight-bold mb-4">Client Information</p>
+                            <p class="mb-1"><span class="text-muted">Name: </span>@ViewBag.UserDetails.lastName, @ViewBag.UserDetails.firstName</p>
+                          
+                            <p class="mb-1"><span class="text-muted">Home Address: </span>@ViewBag.UserDetails.homeAddress</p>
+                            <p class="mb-1"><span class="text-muted">Email Address: </span>@ViewBag.UserDetails.emailAddress</p>
+                            <br /><br />
+                            <p class="mb-1"><span class="text-muted">Date Ordered: </span> @ViewBag.MainOrder.dateRegistered</p>
+                            <p class="mb-1"><span class="text-muted">Delivery Date: </span>@ViewBag.MainOrder.deliveryDate</p>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p class="font-weight-bold mb-4">Payment Details</p>
+                            <p class="mb-1"><span class="text-muted">Payment Type: </span>GRM Credits</p>
+                            <p class="mb-1"><span class="text-muted">Name: </span> GRM Company</p>
+                            <p class="mb-1"><span class="text-muted">Branch Address: </span> @ViewBag.UserBM.homeAddress</p>
+                            <p class="mb-1"><span class="text-muted">Contact Number: </span> @ViewBag.UserBM.contactnumber</p>
+                        </div>
+                    </div>
+                    <div class="row p-5">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="border-0 text-uppercase small font-weight-bold">ID</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Item</th>
+                                      
+                                        <th class="border-0 text-uppercase small font-weight-bold">Quantity</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Unit Cost</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var grandTotal = 0;
+                                        foreach (var item in ViewBag.OrderList)
+                                        {
+                                            var totalEach = item.price * item.quantity;
+                                            grandTotal += item.price * item.quantity;
+                                            <tr>
+                                                <td>@item.packageId</td>
+                                                <td>@item.prodName</td>
+                                                <td>@item.quantity</td>
+                                                <td>₱@string.Format("{0:N2}", item.price)</td>
+                                                <td>₱@string.Format("{0:N2}", totalEach) </td>
+                                            </tr>
+
+                                        }
+
+
+                                    }
+                                 
+                               
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row-reverse bg-dark text-white p-4">
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2">Grand Total</div>
+                            <div class="h2 font-weight-light">₱@string.Format("{0:N2}", grandTotal)</div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-light mt-5 mb-5 text-center small">GRM</div>
+</div>
+
+<style>
+    body {
+    background: grey;
+    margin-top: 120px;
+    margin-bottom: 120px;
+}
+</style>
+
+<style>
+    .print{
+        margin-left:24%;
+        bottom:0;
+        position:fixed;
+        width:50%;
+        z-index:5;
+
+    }
+    @@media print {
+
+        .print {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+
+    $('.print').click(function () {
+        window.print();
+    });
+
+</script>

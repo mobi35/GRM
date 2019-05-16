@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "ViewMessageFeed";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+<div style="margin-left:18%; margin-top:2%">
+
+
+    <form method="post" action="~/Admin/ReplyFeed">
+        <input type="text" value="@ViewBag.Emails " name="emailmsg" class="form-control user" />
+        <br />
+        <textarea class="form-control" name="feedmsg"></textarea>
+        <br />
+        <input class="btn btn-success" type="submit" />
+    </form>
+    </div>

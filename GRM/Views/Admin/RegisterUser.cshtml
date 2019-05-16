@@ -1,0 +1,203 @@
+﻿@model GRM.Models.tbl_Users
+
+@{
+    ViewBag.Title = "RegisterUser";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+
+<style>
+    .validator {
+    
+    color:#EF4836;
+   
+    }
+    .bg-danger {
+    padding:10px 10px 10px 10px !important;
+    opacity:0.9!important;
+    }
+
+</style>
+
+<div style="margin-left:18%; margin-top:2%">
+    <!-- Nav pills -->
+    <h3 style =" width: 100%; "><span  style ="color: white;background-color: gold; padding: 10px;">Add User</span></h3>
+
+</div>
+@using (Html.BeginForm("RegisterExecute", "Admin", FormMethod.Post, new { @class = "registrationForm", enctype = "multipart/form-data" }))
+{
+
+    <div style="margin-top:3%; ">
+        @Html.DisplayFor(model => model.outputMessage)
+    </div>
+
+    <div style="margin-left:20%; width:50%; margin-top:3%">
+        
+     
+       
+
+        <h5> @Html.LabelFor(model => model.position)</h5>
+        @Html.DropDownListFor(model => model.position, new List<SelectListItem> {
+
+         new SelectListItem { Text = "Branch Manager", Value = "branchmanager" },
+
+          new SelectListItem { Text = "Client", Value = "client" }
+   }, new { @class = "positionClass form-control", style = "margin-bottom:2%;" })
+
+
+   
+        <h5> @Html.LabelFor(model => model.firstName)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.firstName)</p>
+        @Html.TextBoxFor(model => model.firstName, new {  @class = "form-control" , style = "margin-bottom:2%;"})
+
+        <h5> @Html.LabelFor(model => model.lastName)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.lastName)</p>
+        @Html.TextBoxFor(model => model.lastName, new {  @class = "form-control", style = "margin-bottom:2%;" })
+
+     
+   
+            <h5> @Html.LabelFor(model => model.userName)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.userName)</p>
+        @Html.TextBoxFor(model => model.userName, new { @class = "form-control", style = "margin-bottom:2%;" })
+    
+        <h5>   @Html.LabelFor(model => model.PassWord)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.PassWord)</p>
+      
+          @Html.TextBoxFor(model => model.PassWord, new { @class = "form-control", type ="password", style = "margin-bottom:2%;" })
+
+        <h5>   @Html.LabelFor(model => model.confirmPassword)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.confirmPassword )</p>
+        @Html.TextBoxFor(model => model.confirmPassword, new { @class = "form-control", type = "password", style = "margin-bottom:2%;" })
+
+    <h5>  @Html.LabelFor(model => model.emailAddress)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.emailAddress)</p>
+        @Html.TextBoxFor(model => model.emailAddress, new { @class = "form-control", style = "margin-bottom:2%;" })
+
+    <h5>  @Html.LabelFor(model => model.homeAddress)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.homeAddress)</p>
+        @Html.TextBoxFor(model => model.homeAddress, new { @class = "form-control", style = "margin-bottom:2%;" })
+        
+        
+        <h5>  @Html.LabelFor(model => model.contactnumber)</h5>
+        <p class="validator">@Html.ValidationMessageFor(model => model.contactnumber)</p>
+        @Html.TextBoxFor(model => model.contactnumber, new { @class = "form-control", style = "margin-bottom:2%;" })
+
+        <div class="payment_period">
+        
+        </div>
+
+        <h5>  @Html.LabelFor(model => model.contract_duration)</h5>
+
+        @Html.DropDownListFor(model => model.contract_duration, new List<SelectListItem> {
+       new SelectListItem { Text = "1 Year", Value = "1" },
+           new SelectListItem { Text = "2 Years", Value = "2" },
+               new SelectListItem { Text = "3 Years", Value = "3" },
+                   new SelectListItem { Text = "4 Years", Value = "4" },
+                       new SelectListItem { Text = "5 Years", Value = "5" },
+                         new SelectListItem { Text = "6 Years", Value = "6" },
+           new SelectListItem { Text = "7 Years", Value = "7" },
+               new SelectListItem { Text = "8 Years", Value = "8" },
+                   new SelectListItem { Text = "9 Years", Value = "9" },
+                       new SelectListItem { Text = "10 Years", Value = "10" },
+       new SelectListItem { Text = "11 Years", Value = "11" },
+       new SelectListItem { Text = "12 Years", Value = "12" },
+               new SelectListItem { Text = "13 Years", Value = "13" },
+                   new SelectListItem { Text = "14 Years", Value = "14" },
+                       new SelectListItem { Text = "15 Years", Value = "15" },
+   }, new { @class = "form-control", style = "margin-bottom:2%;" })
+
+
+        <h5>  @Html.LabelFor(model => model.gender)</h5>
+   
+        @Html.DropDownListFor(model => model.gender, new List<SelectListItem> {
+       new SelectListItem { Text = "Male", Value = "Male" },
+       new SelectListItem { Text = "Female", Value = "Female" }
+   }, new { @class = "form-control", style = "margin-bottom:2%;" })
+
+ 
+        <br />
+
+        <div class="hideMe" >
+            <div class="IsOperational">
+                <h5>Branch Availability</h5>
+                <input type="checkbox" class="operateSunday" name="operateSunday" value="Operational" />&nbsp&nbsp Open on Sunday <br />
+                <input type="checkbox" class="operateSaturday" name="operateSaturday" value="Operational" />&nbsp&nbsp Open on Saturday
+         <br />
+                <br />
+               </div>
+             <h5>Branch Manager</h5>
+            @Html.DropDownListFor(model => model.branchManager, GRM.Controllers.AdminController.BranchManagerDropDown(), new { @class = "branchDropDown form-control", style = "margin-bottom:2%;" , disabled = "true"})
+
+
+
+
+            </div>
+        <div class="ForClient">
+          
+           
+        </div>
+        <label for="dti">DTI</label>
+        <input type="radio" name="dtiOrSec" value="dti" /><br />
+        <label for="sec">SEC</label>
+        <input type="radio" name="dtiOrSec" value="sec" />
+            <input type="submit" class="btn btn-primary registerButton" />
+
+        </div>
+    <br /><br /><br /><br /><br />
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        if ($('.outs').text() == "") {
+            $('.outputHolder').css("display", "none");
+        }
+
+        if ($('.outs').text() == "Registered") {
+           
+            $('.dangerz').css("cssText", "background-color :green !important;");
+            $('input[type="text"],input[type="password"]').val('');
+        }
+        if ($('.positionClass').val() == "branchmanager") {
+            $('.IsOperational').css('display', 'none');
+            $('.ForClient').css('display', 'none');
+            $('.payment_period').css('display', 'none');
+        } else {
+            $('.IsOperational').css('display', 'block');
+            $('.ForClient').css('display', 'block');
+            $('.payment_period').css('display', 'block');
+        }
+
+  
+    });
+
+
+
+    $('.registerButton').click(function () {
+       
+
+        if ($('.outs').text() != null) {
+            $('.outputHolder').css("display", "inline");
+        } else {
+            $('.outputHolder').css("display", "none");
+        }
+    });
+
+    $('.positionClass').change(function () {
+      
+       
+
+        if ($(this).val() == 'client') {
+
+            $('.branchDropDown').attr('disabled', false);
+            $('.ForClient').css('display', 'block');
+            $('.payment_period').css('display', 'block');
+            
+            $('.IsOperational').css('display', 'block');
+        } else {
+            $('.ForClient').css('display', 'none');
+            $('.payment_period').css('display', 'none');
+            $('.branchDropDown').attr('disabled', true);
+            $('.IsOperational').css('display', 'none');
+          
+        }
+    });
+</script>

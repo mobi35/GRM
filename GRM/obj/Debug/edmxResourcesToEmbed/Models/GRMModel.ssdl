@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GRMDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_Clients">
+    <Key>
+      <PropertyRef Name="clientId" />
+    </Key>
+    <Property Name="clientId" Type="int" Nullable="false" />
+    <Property Name="companyName" Type="nvarchar" MaxLength="50" />
+    <Property Name="description" Type="nvarchar" MaxLength="50" />
+    <Property Name="location" Type="nvarchar" MaxLength="50" />
+    <Property Name="contact" Type="nvarchar" MaxLength="50" />
+    <Property Name="logo" Type="nvarchar(max)" />
+    <Property Name="contractDuration" Type="nvarchar" MaxLength="50" />
+    <Property Name="dateRegistered" Type="datetime" />
+    <Property Name="isActive" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_Conversation">
+    <Key>
+      <PropertyRef Name="conversationId" />
+    </Key>
+    <Property Name="conversationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="toUser" Type="int" />
+    <Property Name="fromUser" Type="int" />
+    <Property Name="message" Type="nvarchar" MaxLength="50" />
+    <Property Name="dateSent" Type="datetime" />
+    <Property Name="isRead" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_Homepage">
+    <Key>
+      <PropertyRef Name="homepageId" />
+    </Key>
+    <Property Name="homepageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="whatTag" Type="nvarchar" MaxLength="50" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" />
+    <Property Name="description" Type="nvarchar" MaxLength="50" />
+    <Property Name="image" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tbl_OrderHistory">
+    <Key>
+      <PropertyRef Name="historyId" />
+    </Key>
+    <Property Name="historyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="clientId" Type="int" Nullable="false" />
+    <Property Name="dateRegistered" Type="datetime" />
+    <Property Name="isApproved" Type="int" />
+    <Property Name="orderId" Type="int" Nullable="false" />
+    <Property Name="totalPrice" Type="float" />
+  </EntityType>
+  <EntityType Name="tbl_OrderList">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="orderId" Type="int" />
+    <Property Name="clientId" Type="int" />
+    <Property Name="packageId" Type="int" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="usageDate" Type="int" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_PackageItems">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="packageItemId" Type="int" Nullable="false" />
+    <Property Name="item" Type="nvarchar" MaxLength="50" />
+    <Property Name="packageId" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Packages">
+    <Key>
+      <PropertyRef Name="packageId" />
+    </Key>
+    <Property Name="packageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="packageName" Type="nvarchar" MaxLength="50" />
+    <Property Name="dateRegistered" Type="datetime" />
+    <Property Name="accountType" Type="nvarchar" MaxLength="50" />
+    <Property Name="clientId" Type="int" />
+    <Property Name="packagePrice" Type="float" />
+  </EntityType>
+  <EntityType Name="tbl_ProductCategories">
+    <Key>
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="categoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="description" Type="nvarchar" MaxLength="50" />
+    <Property Name="dateRegistered" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_Products">
+    <Key>
+      <PropertyRef Name="productId" />
+    </Key>
+    <Property Name="productId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productName" Type="nvarchar" MaxLength="50" />
+    <Property Name="productDescription" Type="nvarchar" MaxLength="50" />
+    <Property Name="dateRegistered" Type="datetime" />
+    <Property Name="categoryId" Type="int" Nullable="false" />
+    <Property Name="productPrice" Type="float" />
+  </EntityType>
+  <EntityType Name="tbl_Users">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="nvarchar" MaxLength="50" />
+    <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
+    <Property Name="firstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="emailAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="homeAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="gender" Type="nvarchar" MaxLength="50" />
+    <Property Name="dateRegistered" Type="datetime" />
+    <Property Name="position" Type="nvarchar" MaxLength="50" />
+    <Property Name="image" Type="nvarchar(max)" />
+    <Property Name="isActive" Type="int" />
+  </EntityType>
+  <EntityContainer Name="GRMDBModelStoreContainer">
+    <EntitySet Name="tbl_Clients" EntityType="Self.tbl_Clients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Conversation" EntityType="Self.tbl_Conversation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Homepage" EntityType="Self.tbl_Homepage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_OrderHistory" EntityType="Self.tbl_OrderHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_OrderList" EntityType="Self.tbl_OrderList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_PackageItems" EntityType="Self.tbl_PackageItems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Packages" EntityType="Self.tbl_Packages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_ProductCategories" EntityType="Self.tbl_ProductCategories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Products" EntityType="Self.tbl_Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

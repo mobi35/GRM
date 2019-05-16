@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GRMDBModelStoreContainer" CdmEntityContainer="GRMDB">
+    <EntitySetMapping Name="tbl_Clients">
+      <EntityTypeMapping TypeName="GRMDBModel.tbl_Clients">
+        <MappingFragment StoreEntitySet="tbl_Clients">
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="companyName" ColumnName="companyName" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="contact" ColumnName="contact" />
+          <ScalarProperty Name="logo" ColumnName="logo" />
+          <ScalarProperty Name="contractDuration" ColumnName="contractDuration" />
+          <ScalarProperty Name="dateRegistered" ColumnName="dateRegistered" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Conversation">
+      <EntityTypeMapping TypeName="GRMDBModel.tbl_Conversation">
+        <MappingFragment StoreEntitySet="tbl_Conversation">
+          <ScalarProperty Name="conversationId" ColumnName="conversationId" />
+          <ScalarProperty Name="toUser" ColumnName="toUser" />
+          <ScalarProperty Name="fromUser" ColumnName="fromUser" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="dateSent" ColumnName="dateSent" />
+          <ScalarProperty Name="isRead" ColumnName="isRead" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Homepage">
+      <EntityTypeMapping TypeName="GRMDBModel.tbl_Homepage">
+        <MappingFragment StoreEntitySet="tbl_Homepage">
+          <ScalarProperty Name="homepageId" ColumnName="homepageId" />
+          <ScalarProperty Name="whatTag" ColumnName="whatTag" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="image" ColumnName="image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Message">
+      <EntityTypeMapping TypeName="GRMDBModel.tbl_Message">
+        <MappingFragment StoreEntitySet="tbl_Message">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="dateSent" ColumnName="dateSent" />
+          <ScalarProperty Name="sent" ColumnName="sent" />
+          <ScalarProperty Name="receive" ColumnName="receive" />
+          <ScalarProperty Name="isRead" ColumnName="isRead" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_OrderList">
+      <EntityTypeMapping TypeName="GRMDBModel.tbl_OrderList">
+        <MappingFragment StoreEntitySet="tbl_OrderList">
+          <ScalarProperty Name="orderId" ColumnName="orderId" />
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="packageId" ColumnName="packageId" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="usageDate" ColumnName="usageDate" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="prodName" ColumnName="prodName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_PackageItems">
+      <EntityTypeMapping TypeName="GRMDBModel.tbl_PackageItems">
+        <MappingFragment StoreEntitySet="tbl_PackageItems">
+          <ScalarProperty Name="packageItemId" ColumnName="packageItemId" />
+          <ScalarProperty Name="item" ColumnName="item" />
+          <ScalarProperty Name="packageId" ColumnName="packageId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Packages">
+      <EntityTypeMapping TypeName="GRMDBModel.tbl_Packages">
+        <MappingFragment StoreEntitySet="tbl_Packages">
+          <ScalarProperty Name="packageId" ColumnName="packageId" />
+          <ScalarProperty Name="packageName" ColumnName="packageName" />
+          <ScalarProperty Name="dateRegistered" ColumnName="dateRegistered" />
+          <ScalarProperty Name="accountType" ColumnName="accountType" />
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="packagePrice" ColumnName="packagePrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_ProductCategories">
+      <EntityTypeMapping TypeName="GRMDBModel.tbl_ProductCategories">
+        <MappingFragment StoreEntitySet="tbl_ProductCategories">
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="dateRegistered" ColumnName="dateRegistered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Products">
+      <EntityTypeMapping TypeName="GRMDBModel.tbl_Products">
+        <MappingFragment StoreEntitySet="tbl_Products">
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+          <ScalarProperty Name="dateRegistered" ColumnName="dateRegistered" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="productPrice" ColumnName="productPrice" />
+          <ScalarProperty Name="productImage" ColumnName="productImage" />
+          <ScalarProperty Name="packageBy" ColumnName="packageBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Users">
+      <EntityTypeMapping TypeName="GRMDBModel.tbl_Users">
+        <MappingFragment StoreEntitySet="tbl_Users">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
+          <ScalarProperty Name="homeAddress" ColumnName="homeAddress" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="dateRegistered" ColumnName="dateRegistered" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="branchManager" ColumnName="branchManager" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PageContents">
+      <EntityTypeMapping TypeName="GRMDBModel.PageContent">
+        <MappingFragment StoreEntitySet="PageContent">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="contents" ColumnName="contents" />
+          <ScalarProperty Name="datepub" ColumnName="datepub" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_News">
+      <EntityTypeMapping TypeName="GRMDBModel.tbl_News">
+        <MappingFragment StoreEntitySet="tbl_News">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="datapublish" ColumnName="datapublish" />
+          <ScalarProperty Name="employee" ColumnName="employee" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_OrderHistory">
+      <EntityTypeMapping TypeName="GRMDBModel.tbl_OrderHistory">
+        <MappingFragment StoreEntitySet="tbl_OrderHistory">
+          <ScalarProperty Name="deliveryDate" ColumnName="deliveryDate" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="orderId" ColumnName="orderId" />
+          <ScalarProperty Name="isApproved" ColumnName="isApproved" />
+          <ScalarProperty Name="dateRegistered" ColumnName="dateRegistered" />
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="historyId" ColumnName="historyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="GRMDBModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="EnrollmentDate" ColumnName="EnrollmentDate" />
+          <ScalarProperty Name="FirstMidName" ColumnName="FirstMidName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

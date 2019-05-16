@@ -1,0 +1,102 @@
+﻿    
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/clientMaster.cshtml";
+}
+
+
+
+<div style="margin-left:18%; margin-top:2%">
+    <!-- Nav pills -->
+
+    
+    <h3 style =" width: 100%; "><span style ="color: white;background-color: gold; padding: 10px;"> Products</span></h3>
+    <br/>
+    <ul class="nav nav-tabs">
+      
+    @{
+        <!--(List<GRM.Models.tbl_ProductCategories>)-->
+       
+        foreach (var temp in ViewBag.allCategory)
+        {
+            <li class="nav-item">
+
+                <a style="font-family: sans-serif; font-weight: bolder; color: black; font-size: 15px; text-decoration: none;" class="prodLink nav-link " data-toggle="pill" href="#@temp.name.Replace(" ", "_")">@temp.name</a>
+            </li>
+        }
+
+
+    }
+
+
+      
+
+    </ul>
+
+    <!-- Tab panes -->
+    <div style="margin-top:4%; margin-right:3%" class="tab-content">
+
+        @{
+        <!--(List<GRM.Models.tbl_ProductCategories>)-->
+            GRM.Models.GRMDB db = new GRM.Models.GRMDB();
+            string myUser = Session["userName"].ToString();
+            var searchBM = db.tbl_Users.FirstOrDefault(a => a.userName == myUser);
+            foreach (var temp in ViewBag.allCategory)
+            {
+
+                <div class="tab-pane container " id="@temp.name.Replace(" ","_" )">
+                    <div class="container">
+                        <div class="row">
+                            @{
+                               
+                                var selProductWithCategories = db.tbl_Products.ToList().Where(a => a.categoryId == temp.categoryId && a.packageBy == searchBM.branchManager && a.isArchive == null);
+                                foreach (var seleach in selProductWithCategories)
+                                {
+
+                                    <div class="col-xs-4 col-sm-3 col-md-2">
+                                        <div class="thumbnail">
+                                            <a href="~/Client/Product/@seleach.productId"><img src="~/Content/@seleach.productImage" width="150px" height="150px" class="img-responsive"></a>  
+                                            <div class="caption">
+                                                <p>@seleach.productName</p>
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12 price">
+                                                        <h4 style="margin:5% auto;"><label style="font-size:14px">₱@seleach.productPrice</label></h4>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                                        <a href="#" onclick="return AddToCart('@seleach.productId')" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</a>
+                                                    </div>
+                                                </div>
+                                                <p> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                }
+
+
+                            }
+
+
+
+                          
+
+                        </div>
+                    </div>
+                </div>
+                                }
+
+        }
+
+
+        
+      
+
+
+   
+        <script src="~/Scripts/jquery223.js"></script>
+
+    </div>
+
+</div>
+

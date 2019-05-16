@@ -1,0 +1,65 @@
+﻿
+@model GRM.Models.tbl_OrderHistory
+@{
+
+    ViewBag.Title = "MyOrders";
+    Layout = "~/Views/Shared/clientMaster.cshtml";
+}
+
+
+
+<div style="margin-left: 20%; width: 75%; margin-top: 3%">
+    <h3 style =" width: 100%; "><span  style ="color: white;background-color: gold; padding: 10px;">My Order(s)</span></h3>
+  
+
+    <div class="table-responsive">
+        <table id="orders" class="table table-striped table-bordered nowrap">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Price</th>
+                <th>Date</th>
+                <th>Invoice</th>
+                <th>Delivery Date</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @{
+
+                foreach (var ord in ViewBag.ordered)
+                {
+
+                    <tr>
+                        <td>@ord.orderId</td>
+                        <td>₱@String.Format("{0:N2}", ord.totalPrice) </td>
+                        <td>@ord.dateRegistered</td>
+                        <td><a href="~/Client/Invoice/@ord.orderId">Invoice</a></td>
+                        <td>@ord.deliveryDate</td>
+                        <td>
+                            @{
+
+                                if (ord.isApproved == null)
+                                {
+                                    <p>Pending</p>
+                                }
+                                else
+                                {
+                                    <p>Paid</p>
+                                }
+
+                            }
+                        </td>
+                    </tr>
+
+                }
+            }
+
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

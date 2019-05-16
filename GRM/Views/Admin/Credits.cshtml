@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Credits";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+
+<h2>Credits</h2>
+
+
+
+<div style="margin-left: 18%; width: 30%;">
+    <h3 style =" width: 100%; "><span  style ="color: white;background-color: gold; padding: 10px;">Add Credits</span></h3>
+
+    <label>Select User</label>
+    <select name="users" class="users form-control">
+
+
+        @{
+            foreach (var s in ViewBag.users)
+            {
+                <option value="@s.userName">@s.userName</option>
+            }
+        }
+    </select>
+    <br />
+    <div class="credits">Current Credits : 200</div>
+    <br/>
+    <label>Credits</label>
+    <input type="text" min="1" maxlength="8" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="number form-control"/>
+
+
+    <label>Months</label>
+    <input type="text" min="1" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="month form-control" />
+    <br/>
+    <button class="btn btn-success sendCredits">Add credit</button>
+</div>
+
+

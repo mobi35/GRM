@@ -1,0 +1,121 @@
+﻿@model GRM.Models.tbl_PackageItems
+@{
+    ViewBag.Title = "EditPackageQuantities";
+    Layout = "~/Views/Shared/adminMaster.cshtml";
+}
+
+<style>
+    .validator {
+        color: #EF4836;
+    }
+</style>
+
+<div style="margin-left:18%; margin-top:2%">
+    <!-- Nav pills -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="prodLink nav-link active" data-toggle="pill" href="#home">Edit Package</a>
+        </li>
+
+
+    </ul>
+
+    <!-- Tab panes -->
+    <div style="margin-top:4%; margin-right:3%" class="tab-content">
+
+
+        <div class="tab-pane container active" id="home">
+
+
+            @using (Html.BeginForm("EditPackageQuantity", "Admin", FormMethod.Post, new { @class = "registrationForm", enctype = "multipart/form-data" }))
+            {
+
+
+                <div style="width:50%; margin-top:3%">
+
+                  @{
+                      foreach (var item in ViewBag.selectedPackages)
+                      {
+
+                        <h4>@item.item</h4>
+                        <input type="hidden" name="id" class="form-control" value="@item.id" />
+                        <label>Quantity</label>
+                     <input type="text" name="quantity" class="form-control" value="@item.quantity" />
+
+                    <input type="hidden" name="packId" class="form-control" value="@item.packageId" />
+                    <label>Price</label>
+                    <input type="text" name="packPrice" class="form-control" value="@item.price" />
+
+
+                      }
+
+                }
+
+
+
+
+                    <br />
+
+                    <input type="submit" class="btn btn-primary" />
+
+                </div>
+                <br /><br /><br /><br /><br />
+            }
+
+
+        </div>
+
+
+
+        <script src="~/Scripts/jquery223.js"></script>
+
+        <script>
+
+    $(document).ready(function () {
+
+
+
+        if ($('.successCategory').text() == "Category Added") {
+            $('.successCategory').css("cssText", "display:block !important");
+            $('.catLink').addClass("active show");
+            $('.prodLink').removeClass("active show");
+            $('#home').removeClass("active");
+            $('#home').removeClass("show");
+            $('#menu1').addClass("active show");
+        } else {
+            $('.successCategory').css("cssText", "display:none !important");
+        }
+
+        if ($('.errorCategory').text() == "The category name is already taken") {
+            $('.errorCategory').css("cssText", "display:block !important");
+            $('.catLink').addClass("active show");
+            $('.prodLink').removeClass("active show");
+            $('#home').removeClass("active");
+            $('#home').removeClass("show");
+            $('#menu1').addClass("active show");
+        } else {
+            $('.errorCategory').css("cssText", "display:none !important");
+
+        }
+
+
+    if ($('.successProduct').text() == "Product Added") {
+        $('.successProduct').css("cssText", "display:block !important");
+
+    } else {
+        $('.successProduct').css("cssText", "display:none !important");
+    }
+
+    if ($('.errorProduct').text() == "The name is already taken") {
+        $('.errorProduct').css("cssText", "display:block !important");
+
+    } else {
+        $('.errorProduct').css("cssText", "display:none !important");
+    }
+    });
+
+
+
+
+
+        </script>
